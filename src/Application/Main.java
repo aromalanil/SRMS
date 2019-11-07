@@ -5,11 +5,13 @@
  */
 package Application;
 
+
 /**
  *
  * @author cec-t100
  */
 public class Main {
+    
 
     /**
      * @param args the command line arguments
@@ -17,6 +19,8 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         Login log = new Login();
+        MyDBConnection connection = new MyDBConnection();
+        connection.init();
     }
     
 }

@@ -120,7 +120,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        password.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
+        password.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         password.setBorder(null);
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
