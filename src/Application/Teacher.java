@@ -58,6 +58,11 @@ public class Teacher extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aromal\\Downloads\\exit.png")); // NOI18N
         jLabel8.setToolTipText("");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOut(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,6 +189,12 @@ public class Teacher extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOut
+        // TODO add your handling code here:
+        this.setVisible(false);
+        Login log = new Login();
+    }//GEN-LAST:event_logOut
 
     /**
      * @param args the command line arguments
