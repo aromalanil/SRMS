@@ -4,7 +4,7 @@
 <img src="https://github.com/aromalanil/SRMS/blob/master/src/art/demo.JPG" width="500">
 
 This project is made as part of the **ASD Lab** for S5 CSE Students under **Kerala Technical University (KTU)**.
-SRMS application is for managing the data of students.
+SRMS application is for managing the academic data of students.
 
 The users are :
 * Teachers
