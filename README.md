@@ -18,6 +18,8 @@ The users are :
 
 ## Students
 
+<img src="https://github.com/aromalanil/SRMS/blob/master/src/art/demo_student.jpg" width="600">
+
 * Can view attendance & internal mark entered by the teacher.
 
 ## Staff advisor
