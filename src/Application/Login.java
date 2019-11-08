@@ -264,6 +264,7 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     Teacher teacher = new Teacher();
                     teacher.teacherId=id;
+                    teacher.initialise();
                     break;
                 case "student":
                     this.setVisible(false);
@@ -275,6 +276,7 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     Head head = new Head();
                     head.headId=id;
+                    head.initialise();
                     break;
                 default:
                     break;
