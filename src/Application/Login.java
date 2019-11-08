@@ -253,6 +253,7 @@ public class Login extends javax.swing.JFrame {
         {
             jLabel8.setVisible(true);
         }
+        System.out.println("Hai");
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
