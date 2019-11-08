@@ -5,6 +5,8 @@
  */
 package Application;
 
+import java.sql.*;
+
 /**
  *
  * @author cec-t100
@@ -35,10 +37,10 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        userNameTextBox = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        password = new javax.swing.JPasswordField();
+        passwordTextBox = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -58,7 +60,7 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(250, 250, 250));
         jLabel5.setText("Managment System");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aromal\\Downloads\\student (2).png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raw/main_page_logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,11 +95,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel1.setText("Username :");
 
-        username.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        username.setBorder(null);
-        username.addActionListener(new java.awt.event.ActionListener() {
+        userNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        userNameTextBox.setBorder(null);
+        userNameTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameActionPerformed(evt);
+                userNameTextBoxActionPerformed(evt);
             }
         });
 
@@ -120,11 +122,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        password.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
-        password.setBorder(null);
-        password.addActionListener(new java.awt.event.ActionListener() {
+        passwordTextBox.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
+        passwordTextBox.setBorder(null);
+        passwordTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
+                passwordTextBoxActionPerformed(evt);
             }
         });
 
@@ -152,7 +154,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password)
+                            .addComponent(passwordTextBox)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +163,7 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addComponent(jLabel1)
                                         .addComponent(jLabel7)
-                                        .addComponent(username)
+                                        .addComponent(userNameTextBox)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel8))
                                 .addGap(0, 5, Short.MAX_VALUE)))))
@@ -177,13 +179,13 @@ public class Login extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -211,9 +213,9 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+    private void userNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usernameActionPerformed
+    }//GEN-LAST:event_userNameTextBoxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -221,44 +223,65 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+          String userName = userNameTextBox.getText();
+          String password = passwordTextBox.getText();
+          
+        try
+        {
+        MyDBConnection databaseConnection = new MyDBConnection();
+        databaseConnection.init();
+        Connection connection = databaseConnection.getMyConnection();
+        Statement connectionStatement = connection.createStatement();
+        String query ="select id from login where(password='"+password+"' and username='"+userName+"')";
         
-        if("teacher".equals(username.getText()))
+        ResultSet resultSet;
+        resultSet=connectionStatement.executeQuery(query);
+        while(resultSet.next())
         {
-            if("teacher".equals(password.getText()))
-            {
-                this.setVisible(false);
-                Teacher t = new Teacher();
-            } else {
-            }
+            System.out.println("Logged in");
         }
-        if("student".equals(username.getText()))
+        }
+        catch(Exception e)
         {
-            if("student".equals(password.getText()))
-            {
-                this.setVisible(false);
-                Student s = new Student();
-            } else {
-            }
+            System.out.println("Connection error");
         }
-        if("head".equals(username.getText()))
-        {
-            if("head".equals(password.getText()))
-            {
-                this.setVisible(false);
-                Hod h = new Hod();
-            } else {
-            }
-        }
-        else
-        {
-            jLabel8.setVisible(true);
-        }
-        System.out.println("Hai");
+        
+//        if("teacher".equals(username.getText()))
+//        {
+//            if("teacher".equals(password.getText()))
+//            {
+//                this.setVisible(false);
+//                Teacher t = new Teacher();
+//            } else {
+//            }
+//        }
+//        if("student".equals(username.getText()))
+//        {
+//            if("student".equals(password.getText()))
+//            {
+//                this.setVisible(false);
+//                Student s = new Student();
+//            } else {
+//            }
+//        }
+//        if("head".equals(username.getText()))
+//        {
+//            if("head".equals(password.getText()))
+//            {
+//                this.setVisible(false);
+//                Hod h = new Hod();
+//            } else {
+//            }
+//        }
+//        else
+//        {
+//            jLabel8.setVisible(true);
+//        }
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+    private void passwordTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
+    }//GEN-LAST:event_passwordTextBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,7 +332,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JPasswordField password;
-    private javax.swing.JTextField username;
+    private javax.swing.JPasswordField passwordTextBox;
+    private javax.swing.JTextField userNameTextBox;
     // End of variables declaration//GEN-END:variables
 }

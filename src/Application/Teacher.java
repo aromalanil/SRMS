@@ -48,7 +48,7 @@ public class Teacher extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(103, 71, 206));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aromal\\Downloads\\teacher.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raw/teacher_icon.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,7 +56,7 @@ public class Teacher extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aromal\\Downloads\\logout-32.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raw/logout_icon.png"))); // NOI18N
         jLabel8.setToolTipText("");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

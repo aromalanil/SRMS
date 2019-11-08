@@ -108,7 +108,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Aromal\Downloads\student (2).png"/>
+              <Image iconType="3" name="/raw/main_page_logo.png"/>
             </Property>
           </Properties>
         </Component>
@@ -131,7 +131,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="password" alignment="0" max="32767" attributes="0"/>
+                              <Component id="passwordTextBox" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jButton1" min="-2" pref="125" max="-2" attributes="0"/>
@@ -140,7 +140,7 @@
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                          <Component id="username" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="userNameTextBox" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jSeparator1" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -164,13 +164,13 @@
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="username" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="userNameTextBox" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="password" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="passwordTextBox" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -191,7 +191,7 @@
             <Property name="text" type="java.lang.String" value="Username :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="username">
+        <Component class="javax.swing.JTextField" name="userNameTextBox">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="0"/>
@@ -201,7 +201,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userNameTextBoxActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -233,7 +233,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="password">
+        <Component class="javax.swing.JPasswordField" name="passwordTextBox">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Yu Gothic Medium" size="18" style="1"/>
@@ -243,7 +243,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordTextBoxActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
