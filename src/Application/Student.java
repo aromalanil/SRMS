@@ -25,6 +25,7 @@ package Application;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.*;
 
 /**
  *
@@ -44,6 +45,30 @@ public class Student extends javax.swing.JFrame {
         jTable1.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
         jTable1.getTableHeader().setForeground(new Color(255,255,255));
         
+    }
+    void initialise()
+    {
+       try
+       {
+        MyDBConnection databaseConnection = new MyDBConnection();
+        databaseConnection.init();
+        Connection connection = databaseConnection.getMyConnection();
+        Statement connectionStatement = connection.createStatement();
+        String query ="select name,class,rollno from student where id ="+Integer.toString(studentId)+"";
+        
+        ResultSet resultSet;
+        resultSet=connectionStatement.executeQuery(query);
+        while(resultSet.next())
+        {
+           studentNameTextBox.setText(resultSet.getString(1));
+           studentClassTextBox.setText(resultSet.getString(2));
+           studentRollNoTextBox.setText(resultSet.getString(3));
+        }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Error connection Student");
+       }
     }
 
     /**
@@ -65,6 +90,9 @@ public class Student extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        studentNameTextBox = new javax.swing.JLabel();
+        studentRollNoTextBox = new javax.swing.JLabel();
+        studentClassTextBox = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +180,12 @@ public class Student extends javax.swing.JFrame {
         jTable1.setRowMargin(10);
         jScrollPane1.setViewportView(jTable1);
 
+        studentNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+
+        studentRollNoTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+
+        studentClassTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -160,10 +194,19 @@ public class Student extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(studentNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(studentClassTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(studentRollNoTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(490, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(160, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,11 +217,17 @@ public class Student extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(studentNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jLabel4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(studentClassTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(studentRollNoTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(83, Short.MAX_VALUE))
@@ -250,5 +299,8 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel studentClassTextBox;
+    private javax.swing.JLabel studentNameTextBox;
+    private javax.swing.JLabel studentRollNoTextBox;
     // End of variables declaration//GEN-END:variables
 }

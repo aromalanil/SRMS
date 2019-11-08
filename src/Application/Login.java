@@ -269,6 +269,7 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     Student student = new Student();
                     student.studentId=id;
+                    student.initialise();
                     break;
                 case "head":
                     this.setVisible(false);
@@ -279,11 +280,13 @@ public class Login extends javax.swing.JFrame {
                     break;
             }
         }
+        connection.close();
         }
         catch(Exception e)
         {
             System.out.println("Connection error");
         }
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void passwordTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextBoxActionPerformed
