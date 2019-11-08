@@ -162,7 +162,7 @@ public class Student extends javax.swing.JFrame {
                 {"Maths",  new Double(31.0),  new Double(35.0),  new Double(89.0)},
                 {"Mechanics",  new Double(29.0),  new Double(32.0),  new Double(72.0)},
                 {"C Programming",  new Double(37.0),  new Double(38.0),  new Double(92.0)},
-                {"Electronics",  new Double(25.0),  new Double(24.0), null}
+                {"Electronics",  new Double(25.0),  new Double(24.0),  new Double(87.0)}
             },
             new String [] {
                 "Subjects", "Internal 1", "Internal 2", "Attendance"
