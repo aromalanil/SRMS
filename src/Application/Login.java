@@ -241,6 +241,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+          int id;
           String userName = userNameTextBox.getText();
           String password = passwordTextBox.getText();
           
@@ -250,13 +251,33 @@ public class Login extends javax.swing.JFrame {
         databaseConnection.init();
         Connection connection = databaseConnection.getMyConnection();
         Statement connectionStatement = connection.createStatement();
-        String query ="select id from login where(password='"+password+"' and username='"+userName+"')";
+        String query ="select category,id from login where(password='"+password+"' and username='"+userName+"')";
         
         ResultSet resultSet;
         resultSet=connectionStatement.executeQuery(query);
         while(resultSet.next())
         {
-            System.out.println("Logged in");
+            String userType=resultSet.getString(1);
+            id=resultSet.getInt(2);
+            switch (userType) {
+                case "teacher":
+                    this.setVisible(false);
+                    Teacher teacher = new Teacher();
+                    teacher.teacherId=id;
+                    break;
+                case "student":
+                    this.setVisible(false);
+                    Student student = new Student();
+                    student.studentId=id;
+                    break;
+                case "head":
+                    this.setVisible(false);
+                    Head head = new Head();
+                    head.headId=id;
+                    break;
+                default:
+                    break;
+            }
         }
         }
         catch(Exception e)

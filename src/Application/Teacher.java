@@ -32,7 +32,9 @@ public class Teacher extends javax.swing.JFrame {
     /**
      * Creates new form Teacher
      */
-    public Teacher() {
+    int teacherId;
+    public Teacher()
+    {
         initComponents();
         this.setVisible(true);
     }
@@ -238,6 +240,7 @@ public class Teacher extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Teacher().setVisible(true);
             }

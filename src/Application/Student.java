@@ -25,7 +25,6 @@ package Application;
 
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JTable;
 
 /**
  *
@@ -36,7 +35,9 @@ public class Student extends javax.swing.JFrame {
     /**
      * Creates new form Student
      */
-    public Student() {
+    int studentId;
+    public Student() 
+    {
         initComponents();
         this.setVisible(true);
         jTable1.getTableHeader().setBackground(new Color(103,71,206));
