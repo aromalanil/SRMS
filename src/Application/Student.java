@@ -26,8 +26,7 @@ package Application;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.*;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Aromal Anil
@@ -37,7 +36,8 @@ public class Student extends javax.swing.JFrame {
     /**
      * Creates new form Student
      */
-    int studentId;
+    int studentId,rollNo;
+    String studentClass;
     public Student() 
     {
         initComponents();
@@ -64,7 +64,14 @@ public class Student extends javax.swing.JFrame {
            studentNameTextBox.setText(resultSet.getString(1));
            studentClassTextBox.setText(resultSet.getString(2));
            studentRollNoTextBox.setText(resultSet.getString(3));
+           rollNo=resultSet.getInt(3);
+           studentClass=resultSet.getString(2);
         }
+       
+        
+        query ="select subject,internal1,internal2,attendance from main where rollno="+rollNo+" and class='"+studentClass+"'";
+        resultSet=connectionStatement.executeQuery(query);
+        jTable1.setModel(DbUtils.resultSetToTableModel(resultSet));
         connection.close();
        }
        catch(Exception e)
@@ -160,23 +167,15 @@ public class Student extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Maths",  new Double(31.0),  new Double(35.0),  new Double(89.0)},
-                {"Mechanics",  new Double(29.0),  new Double(32.0),  new Double(72.0)},
-                {"C Programming",  new Double(37.0),  new Double(38.0),  new Double(92.0)},
-                {"Electronics",  new Double(25.0),  new Double(24.0),  new Double(87.0)}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Subjects", "Internal 1", "Internal 2", "Attendance"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         jTable1.setEnabled(false);
         jTable1.setGridColor(new java.awt.Color(56, 41, 103));
