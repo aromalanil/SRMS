@@ -247,8 +247,12 @@
                 </Property>
                 <Property name="autoResizeMode" type="int" value="3"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="67" green="29" red="38" type="rgb"/>
+                </Property>
                 <Property name="rowHeight" type="int" value="30"/>
                 <Property name="rowMargin" type="int" value="10"/>
+                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
