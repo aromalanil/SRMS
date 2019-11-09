@@ -6,9 +6,9 @@
 package Application;
 
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 /**
@@ -17,9 +17,17 @@ import javax.swing.table.TableModel;
  */
 public class ExcelWriter
 {
-     public void toExcel(JTable table, String filename)
+     public void toExcel(JTable table)
     {
-    try{
+        String filename = null;
+        try{
+        JFileChooser f = new JFileChooser();
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+        f.showSaveDialog(null);
+
+        filename=f.getSelectedFile()+"\\output.csv";
+        System.out.println(f.getCurrentDirectory());
+        System.out.println(f.getSelectedFile());
         TableModel model = table.getModel();
         FileWriter excel = new FileWriter(filename);
 

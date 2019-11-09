@@ -25,14 +25,8 @@ package Application;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTable;
-import javax.swing.table.TableModel;
+
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -270,6 +264,9 @@ public class Teacher extends javax.swing.JFrame {
         resultTable.setRowHeight(30);
         jScrollPane1.setViewportView(resultTable);
 
+        exportButton.setBackground(new java.awt.Color(126, 87, 255));
+        exportButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        exportButton.setForeground(new java.awt.Color(255, 255, 255));
         exportButton.setText("Export");
         exportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +288,7 @@ public class Teacher extends javax.swing.JFrame {
                         .addGap(0, 40, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addComponent(exportButton)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -304,7 +301,7 @@ public class Teacher extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(68, 68, 68)
-                        .addComponent(exportButton)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -392,7 +389,7 @@ public class Teacher extends javax.swing.JFrame {
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         // TODO add your handling code here:
         ExcelWriter ex = new ExcelWriter();
-        ex.toExcel(resultTable,"D:\\new.csv");
+        ex.toExcel(resultTable);
     }//GEN-LAST:event_exportButtonActionPerformed
 
     
