@@ -263,6 +263,7 @@ public class Login extends javax.swing.JFrame {
                         this.setVisible(false);
                         Teacher teacher = new Teacher();
                         teacher.teacherId=id;
+                        teacher.teacherName=userName;
                         teacher.initialise();
                         break;
                     case "student":
