@@ -37,7 +37,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setVisible(true);
-        jLabel8.setVisible(false);
+        incorrectEntryText.setVisible(false);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Login extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
+        incorrectEntryText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -157,9 +157,9 @@ public class Login extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(160, 160, 160));
         jLabel7.setText("Sign in to continue");
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(246, 71, 71));
-        jLabel8.setText("Please Check your Username & Password.");
+        incorrectEntryText.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        incorrectEntryText.setForeground(new java.awt.Color(246, 71, 71));
+        incorrectEntryText.setText("Please Check your Username & Password.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,7 +183,7 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(jLabel7)
                                         .addComponent(userNameTextBox)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel8))
+                                    .addComponent(incorrectEntryText))
                                 .addGap(0, 5, Short.MAX_VALUE)))))
                 .addGap(118, 118, 118))
         );
@@ -209,7 +209,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jLabel8)
+                .addComponent(incorrectEntryText)
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
@@ -247,36 +247,44 @@ public class Login extends javax.swing.JFrame {
         databaseConnection.init();
         Connection connection = databaseConnection.getMyConnection();
         Statement connectionStatement = connection.createStatement();
-        String query ="select category,id from login where(password='"+password+"' and username='"+userName+"')";
+        String query ="select category,id,password from login where username='"+userName+"'";
         
         ResultSet resultSet;
         resultSet=connectionStatement.executeQuery(query);
-        while(resultSet.next())
-        {
-            String userType=resultSet.getString(1);
-            id=resultSet.getInt(2);
-            switch (userType) {
-                case "teacher":
-                    this.setVisible(false);
-                    Teacher teacher = new Teacher();
-                    teacher.teacherId=id;
-                    teacher.initialise();
-                    break;
-                case "student":
-                    this.setVisible(false);
-                    Student student = new Student();
-                    student.studentId=id;
-                    student.initialise();
-                    break;
-                case "head":
-                    this.setVisible(false);
-                    Head head = new Head();
-                    head.headId=id;
-                    head.initialise();
-                    break;
-                default:
-                    break;
+        if(resultSet.next())
+        {   
+            if(password.equals(resultSet.getString(3)))
+            {    
+             String userType=resultSet.getString(1);
+                id=resultSet.getInt(2);
+                switch (userType) 
+                {
+                    case "teacher":
+                        this.setVisible(false);
+                        Teacher teacher = new Teacher();
+                        teacher.teacherId=id;
+                        teacher.initialise();
+                        break;
+                    case "student":
+                        this.setVisible(false);
+                        Student student = new Student();
+                        student.studentId=id;
+                        student.initialise();
+                         break;
+                    case "head":
+                        this.setVisible(false);
+                        Head head = new Head();
+                        head.headId=id;
+                        head.initialise();
+                        break;
+                    default:
+                        break;
+                }
             }
+           else
+           {
+               incorrectEntryText.setVisible(true);
+           }
         }
         connection.close();
         }
@@ -333,6 +341,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel incorrectEntryText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -340,7 +349,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

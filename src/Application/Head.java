@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Head extends javax.swing.JFrame {
      * Creates new form Hod
      */
     int headId;
+    String headClass;
     public Head() {
         initComponents();
         this.setVisible(true);
@@ -62,9 +64,14 @@ public class Head extends javax.swing.JFrame {
         resultSet=connectionStatement.executeQuery(query);
         while(resultSet.next())
         {
-            headName.setText(resultSet.getString(1));
-            headClass.setText(resultSet.getString(2));
+            headNameText.setText(resultSet.getString(1));
+            headClassText.setText(resultSet.getString(2));
+            headClass=resultSet.getString(2);
         }
+        query ="select rollno,name,subject,internal1,internal2,attendance from main where class='"+headClass+"'";
+        resultSet=connectionStatement.executeQuery(query);
+        jTable1.setModel(DbUtils.resultSetToTableModel(resultSet));
+        connection.close();
         connection.close();
         }
         catch(Exception e)
@@ -91,8 +98,8 @@ public class Head extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        headName = new javax.swing.JLabel();
-        headClass = new javax.swing.JLabel();
+        headNameText = new javax.swing.JLabel();
+        headClassText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,7 +158,7 @@ public class Head extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel4.setText("Class :");
 
-        jTable1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -175,9 +182,9 @@ public class Head extends javax.swing.JFrame {
         jTable1.setRowHeight(30);
         jScrollPane1.setViewportView(jTable1);
 
-        headName.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        headNameText.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        headClass.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        headClassText.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,11 +199,11 @@ public class Head extends javax.swing.JFrame {
                 .addGap(111, 111, 111)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(headName, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(headNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(188, 188, 188)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(headClass, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(headClassText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -208,8 +215,8 @@ public class Head extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jLabel4)
-                        .addComponent(headName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(headClass, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(headNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(headClassText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
@@ -272,8 +279,8 @@ public class Head extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel headClass;
-    private javax.swing.JLabel headName;
+    private javax.swing.JLabel headClassText;
+    private javax.swing.JLabel headNameText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
