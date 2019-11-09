@@ -174,9 +174,9 @@ public class Head extends javax.swing.JFrame {
         jTable1.setRowHeight(30);
         jScrollPane1.setViewportView(jTable1);
 
-        headNameText.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        headNameText.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
-        headClassText.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        headClassText.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

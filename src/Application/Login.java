@@ -184,7 +184,7 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(userNameTextBox)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(incorrectEntryText))
-                                .addGap(0, 5, Short.MAX_VALUE)))))
+                                .addGap(0, 92, Short.MAX_VALUE)))))
                 .addGap(118, 118, 118))
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,7 +210,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(incorrectEntryText)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
