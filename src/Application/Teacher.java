@@ -23,7 +23,17 @@
  */
 package Application;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -39,7 +49,11 @@ public class Teacher extends javax.swing.JFrame {
     public Teacher()
     {
         initComponents();
+        resultTable.getTableHeader().setBackground(new Color(103,71,206));
+        resultTable.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
+        resultTable.getTableHeader().setForeground(new Color(255,255,255));
         this.setVisible(true);
+        exportButton.setVisible(false);
     }
     
     void initialise()
@@ -95,25 +109,27 @@ public class Teacher extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resultTable = new javax.swing.JTable();
+        exportButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        jPanel3.setBackground(new java.awt.Color(71, 42, 165));
+        jPanel3.setBackground(new java.awt.Color(126, 87, 255));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Name :");
+        jLabel3.setText("Name     :");
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Class       :");
 
-        classList.setBackground(new java.awt.Color(103, 71, 206));
-        classList.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        classList.setForeground(new java.awt.Color(255, 255, 255));
+        classList.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        classList.setForeground(new java.awt.Color(126, 87, 255));
         classList.setBorder(null);
         classList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,10 +141,10 @@ public class Teacher extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Subject   :");
 
-        subjectList.setBackground(new java.awt.Color(103, 71, 206));
-        subjectList.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        subjectList.setForeground(new java.awt.Color(255, 255, 255));
+        subjectList.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        subjectList.setForeground(new java.awt.Color(126, 87, 255));
         subjectList.setBorder(null);
+        subjectList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         subjectList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subjectListActionPerformed(evt);
@@ -137,7 +153,7 @@ public class Teacher extends javax.swing.JFrame {
 
         submitButton.setBackground(new java.awt.Color(255, 255, 255));
         submitButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        submitButton.setForeground(new java.awt.Color(71, 42, 165));
+        submitButton.setForeground(new java.awt.Color(126, 87, 255));
         submitButton.setText("SUBMIT");
         submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,7 +161,7 @@ public class Teacher extends javax.swing.JFrame {
             }
         });
 
-        teacherNameText.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        teacherNameText.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         teacherNameText.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -153,28 +169,27 @@ public class Teacher extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(18, 18, 18)
-                            .addComponent(subjectList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(18, 18, 18)
-                            .addComponent(classList, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(subjectList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(40, 40, 40)
-                        .addComponent(teacherNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(teacherNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(classList, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(teacherNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,9 +201,9 @@ public class Teacher extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subjectList, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addGap(105, 105, 105)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(103, 71, 206));
@@ -216,9 +231,9 @@ public class Teacher extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jLabel1)
-                .addGap(232, 232, 232)
+                .addGap(298, 298, 298)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(61, 61, 61))
         );
@@ -228,15 +243,39 @@ public class Teacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        resultTable.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        resultTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        resultTable.setRowHeight(30);
+        jScrollPane1.setViewportView(resultTable);
+
+        exportButton.setText("Export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -245,14 +284,28 @@ public class Teacher extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 40, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(exportButton)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
+                        .addComponent(exportButton)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,8 +317,8 @@ public class Teacher extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -306,7 +359,24 @@ public class Teacher extends javax.swing.JFrame {
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
         // TODO add your handling code here:
+        try
+        {
+           MyDBConnection databaseConnection = new MyDBConnection();
+           databaseConnection.init();
+           Connection connection = databaseConnection.getMyConnection();
+           Statement connectionStatement = connection.createStatement();
         
+         String query ="select rollno,name,internal1,internal2,attendance from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
+         ResultSet resultSet=connectionStatement.executeQuery(query);
+         resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+         exportButton.setVisible(true);
+         connection.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error here");
+        }
     }//GEN-LAST:event_submitButtonMouseClicked
 
     private void subjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectListActionPerformed
@@ -319,6 +389,13 @@ public class Teacher extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_subjectListActionPerformed
 
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+        ExcelWriter ex = new ExcelWriter();
+        ex.toExcel(resultTable,"D:\\new.csv");
+    }//GEN-LAST:event_exportButtonActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -357,6 +434,7 @@ public class Teacher extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> classList;
+    private javax.swing.JButton exportButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,6 +444,8 @@ public class Teacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable resultTable;
     private javax.swing.JComboBox<String> subjectList;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel teacherNameText;
