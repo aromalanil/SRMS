@@ -31,23 +31,23 @@ import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 /**
- *
  * @author Aromal Anil
  */
 public class Head extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Hod
-     */
     int headId;
     String headClass,fileName;
+    
+    
     public Head() {
+        
         initComponents();
         this.setVisible(true);
         resultTable.getTableHeader().setBackground(new Color(103,71,206));
         resultTable.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
         resultTable.getTableHeader().setForeground(new Color(255,255,255));
         resultTable.getTableHeader().setPreferredSize(new Dimension(125,50));
+        
     }
 
     
@@ -55,29 +55,34 @@ public class Head extends javax.swing.JFrame {
      {
        try
        {
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        String query ="select name,class from head where id ="+Integer.toString(headId)+"";
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+            
+            String query ="select name,class from head where id ="+Integer.toString(headId)+"";
         
-        ResultSet resultSet;
-        resultSet=connectionStatement.executeQuery(query);
-        while(resultSet.next())
-        {
+            ResultSet resultSet;
+            resultSet=connectionStatement.executeQuery(query);
+            
+            
+            while(resultSet.next())
+            {
             headNameText.setText(resultSet.getString(1));
             headClassText.setText(resultSet.getString(2));
             headClass=resultSet.getString(2);
-        }
-        query ="select rollno,name,subject,internal1,internal2,attendance from main where class='"+headClass+"' order by subject";
-        resultSet=connectionStatement.executeQuery(query);
-        resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
-        connection.close();
-        connection.close();
+            }
+        
+            query ="select rollno,name,subject,internal1,internal2,attendance from main where class='"+headClass+"' order by subject";
+        
+            resultSet=connectionStatement.executeQuery(query);
+            resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+            connection.close();
         }
         catch(Exception e)
         {
-            
+            System.out.println("Error is"+e); 
         } 
      }
         
@@ -271,24 +276,31 @@ public class Head extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Method to logout the user and go to login page
     private void logOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOut
-        // TODO add your handling code here:
+
         this.setVisible(false);
         Login log = new Login();
+        
     }//GEN-LAST:event_logOut
 
+    
+    //Method for exporting result table as SpreadSheet
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
+
         fileName=fileNameTextBox.getText();
+        
         if(fileName.isEmpty())
         {
             infoBox("Please Enter a valid Filename", "Error");
         }
         else
         {
-         ExcelWriter ex = new ExcelWriter();
-         ex.toExcel(resultTable,fileName);
+            ExcelWriter ex = new ExcelWriter();
+            ex.toExcel(resultTable,fileName);
         }
+        
     }//GEN-LAST:event_exportButtonActionPerformed
 
     

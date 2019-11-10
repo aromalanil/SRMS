@@ -99,13 +99,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(86, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(64, 64, 64)
                 .addComponent(jLabel6)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -115,11 +115,6 @@ public class Login extends javax.swing.JFrame {
 
         userNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         userNameTextBox.setBorder(null);
-        userNameTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextBoxActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setText("Password :");
@@ -137,11 +132,6 @@ public class Login extends javax.swing.JFrame {
 
         passwordTextBox.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         passwordTextBox.setBorder(null);
-        passwordTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTextBoxActionPerformed(evt);
-            }
-        });
         passwordTextBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordTextBoxKeyPressed(evt);
@@ -184,13 +174,13 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(userNameTextBox)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(incorrectEntryText))
-                                .addGap(0, 92, Short.MAX_VALUE)))))
+                                .addGap(0, 102, Short.MAX_VALUE)))))
                 .addGap(118, 118, 118))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
@@ -210,7 +200,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(incorrectEntryText)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -231,28 +221,30 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNameTextBoxActionPerformed
-
+    //Excecute when Login Button is pressed
+    
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-         int id;
-          String userName = userNameTextBox.getText();
-          String password = passwordTextBox.getText();
+        int id;
+        String userName = userNameTextBox.getText();
+        String password = passwordTextBox.getText();
           
         try
         {
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        String query ="select category,id,password from login where username='"+userName+"'";
+           //Creating a new Database Connection   
+           MyDBConnection databaseConnection = new MyDBConnection();
+           databaseConnection.init();
+           Connection connection = databaseConnection.getMyConnection();
+           Statement connectionStatement = connection.createStatement();
+         
+           String query ="select category,id,password from login where username='"+userName+"'";
         
-        ResultSet resultSet;
-        resultSet=connectionStatement.executeQuery(query);
-        if(resultSet.next())
-        {   
+           ResultSet resultSet;
+           resultSet=connectionStatement.executeQuery(query);
+         
+          //If query gave an output
+          if(resultSet.next())
+          {   
             if(password.equals(resultSet.getString(3)))
             {    
              String userType=resultSet.getString(1);
@@ -282,12 +274,16 @@ public class Login extends javax.swing.JFrame {
                         break;
                 }
             }
-           else
-           {
+            else
+            {
                incorrectEntryText.setVisible(true);
-           }
-        }
-        connection.close();
+            }
+          }
+          else
+          {
+            incorrectEntryText.setVisible(true);
+          }
+          connection.close();
         }
         catch(Exception e)
         {
@@ -296,16 +292,15 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void passwordTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTextBoxActionPerformed
-
+    //To Login by pressing ENTER key
     private void passwordTextBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextBoxKeyPressed
-        // TODO add your handling code here:
+        
+        //If pressed key is 'ENTER' click the Login Button
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
             loginButton.doClick();
         }
+        
     }//GEN-LAST:event_passwordTextBoxKeyPressed
 
 

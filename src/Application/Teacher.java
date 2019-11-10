@@ -28,20 +28,18 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
-
 import net.proteanit.sql.DbUtils;
 
 /**
- *
  * @author Aromal Anil
  */
-public class Teacher extends javax.swing.JFrame {
+public class Teacher extends javax.swing.JFrame
+{
 
-    /**
-     * Creates new form Teacher
-     */
     int teacherId;
     String teacherName,className,selectedClass,selectedSubject,fileName;
+    
+    
     public Teacher()
     {
         initComponents();
@@ -56,34 +54,45 @@ public class Teacher extends javax.swing.JFrame {
         csvLabel.setVisible(false);
     }
     
+    
+    //Method to initialise the details of the logged person
+    
     void initialise()
     {
        try
        {
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        String query ="select name from teacher where id ="+Integer.toString(teacherId)+"";
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+            
+            //Getting the teachers name from database
+            String query ="select name from teacher where id ="+Integer.toString(teacherId)+"";
         
-        ResultSet resultSet;
-        resultSet=connectionStatement.executeQuery(query);
-        if(resultSet.next())
-        {
-            teacherNameText.setText(resultSet.getString(1));
-        }
-        query ="select class from main where teacher ='"+teacherName+"' group by class";
-        resultSet=connectionStatement.executeQuery(query);
-        while(resultSet.next())
-        {
-             className=resultSet.getString(1);
-             classList.addItem(className);
-        }
-        connection.close();
+            ResultSet resultSet;
+            resultSet=connectionStatement.executeQuery(query);
+            
+            if(resultSet.next())
+            {
+                teacherNameText.setText(resultSet.getString(1));
+            }
+            
+            //Getting all the classes of the teacher
+            query ="select class from main where teacher ='"+teacherName+"' group by class";
+            resultSet=connectionStatement.executeQuery(query);
+            
+            //Adding the classes to the Dropdown List
+            while(resultSet.next())
+            {
+                className=resultSet.getString(1);
+                classList.addItem(className);
+            }
+            
+            connection.close();
         }
         catch(Exception e)
         {
-            
+            System.out.println(e); 
         }
     }
 
@@ -233,13 +242,13 @@ public class Teacher extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(384, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30))
+                .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,11 +293,6 @@ public class Teacher extends javax.swing.JFrame {
         fileNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         fileNameTextBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         fileNameTextBox.setBorder(null);
-        fileNameTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileNameTextBoxActionPerformed(evt);
-            }
-        });
         fileNameTextBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 fileNameTextBoxKeyPressed(evt);
@@ -318,7 +322,7 @@ public class Teacher extends javax.swing.JFrame {
                         .addComponent(csvLabel)
                         .addGap(34, 34, 34)
                         .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,12 +361,11 @@ public class Teacher extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fileNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameTextBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fileNameTextBoxActionPerformed
-
+    
+    
+    //Method to export the result as SpreadSheet
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
+             
         fileName=fileNameTextBox.getText();
         if(fileName.isEmpty())
         {
@@ -370,19 +373,25 @@ public class Teacher extends javax.swing.JFrame {
         }
         else
         {
-         ExcelWriter ex = new ExcelWriter();
-         ex.toExcel(resultTable,fileName);
+            ExcelWriter ex = new ExcelWriter();
+            ex.toExcel(resultTable,fileName);
         }
     }//GEN-LAST:event_exportButtonActionPerformed
 
+    
+    
+    
+    //Method to Logout and enter the Login page
     private void logOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOut
-        // TODO add your handling code here:
+
         this.setVisible(false);
         Login log = new Login();
+        
     }//GEN-LAST:event_logOut
-
+    
+    //To fetch and display the student data of selected class and subject
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-        // TODO add your handling code here:
+
         try
         {
             MyDBConnection databaseConnection = new MyDBConnection();
@@ -391,12 +400,14 @@ public class Teacher extends javax.swing.JFrame {
             Statement connectionStatement = connection.createStatement();
 
             String query ="select rollno,name,internal1,internal2,attendance from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
+            
             ResultSet resultSet=connectionStatement.executeQuery(query);
+            
+            //Setting table according to resultset
             resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
                
             
-            
-            //Showing elements for exel exporting
+            //Showing elements for Excel exporting
             exportButton.setVisible(true);
             fileNameTextBox.setVisible(true);
             enterFileNameLabel.setVisible(true);
@@ -406,22 +417,26 @@ public class Teacher extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            System.out.println("Error here");
+            System.out.println("Error"+e);
         }
     }//GEN-LAST:event_submitButtonMouseClicked
 
+    //Method to add the selected class and subject to variables
     private void subjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectListActionPerformed
-        // TODO add your handling code here:
+        
+        //Only excectutes when subjectlist is not empty 
         if(subjectList.getItemCount()>0)
         {
             selectedClass=classList.getSelectedItem().toString();
             selectedSubject=subjectList.getSelectedItem().toString();
-            System.out.println(selectedClass+" "+selectedSubject);
+            System.out.println("Selected Combination :"+selectedClass+" "+selectedSubject);
         }
+        
     }//GEN-LAST:event_subjectListActionPerformed
 
     private void classListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classListActionPerformed
-        // TODO add your handling code here:
+
+        //The subjects present now may be those of previous class so remove them.
         subjectList.removeAllItems();
         String cl=classList.getSelectedItem().toString();
         try
@@ -430,14 +445,20 @@ public class Teacher extends javax.swing.JFrame {
             databaseConnection.init();
             Connection connection = databaseConnection.getMyConnection();
             Statement connectionStatement = connection.createStatement();
+            
+            
+            //Getting Subject list of selected Class
             String query ="select subject from main where teacher ='"+teacherName+"' and class='"+cl+"' group by subject";
 
             ResultSet resultSet;
             resultSet=connectionStatement.executeQuery(query);
+            
+            //Adding the subjects to drop down
             while(resultSet.next())
             {
                 subjectList.addItem(resultSet.getString(1));
             }
+            
             connection.close();
         }
         catch(Exception e)
@@ -447,8 +468,10 @@ public class Teacher extends javax.swing.JFrame {
 
     }//GEN-LAST:event_classListActionPerformed
 
+    
+    //Methord to export to excel by pressing enter key
     private void fileNameTextBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fileNameTextBoxKeyPressed
-        // TODO add your handling code here:
+
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         {
             exportButton.doClick();
@@ -462,8 +485,6 @@ public class Teacher extends javax.swing.JFrame {
     }
     
 
-    
-    
     /**
      * @param args the command line arguments
      */

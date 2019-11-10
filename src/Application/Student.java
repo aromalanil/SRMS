@@ -27,52 +27,57 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.*;
 import net.proteanit.sql.DbUtils;
+
 /**
- *
  * @author Aromal Anil
  */
-public class Student extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Student
-     */
+public class Student extends javax.swing.JFrame 
+{
+
     int studentId,rollNo;
     String studentClass;
     public Student() 
     {
         initComponents();
         this.setVisible(true);
-        jTable1.getTableHeader().setBackground(new Color(103,71,206));
-        jTable1.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
-        jTable1.getTableHeader().setForeground(new Color(255,255,255));
+        infoTable.getTableHeader().setBackground(new Color(103,71,206));
+        infoTable.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
+        infoTable.getTableHeader().setForeground(new Color(255,255,255));
         
     }
     void initialise()
     {
        try
        {
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        String query ="select name,class,rollno from student where id ="+Integer.toString(studentId)+"";
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+            
+            String query ="select name,class,rollno from student where id ="+Integer.toString(studentId)+"";
         
-        ResultSet resultSet;
-        resultSet=connectionStatement.executeQuery(query);
-        while(resultSet.next())
-        {
-           studentNameTextBox.setText(resultSet.getString(1));
-           studentClassTextBox.setText(resultSet.getString(2));
-           studentRollNoTextBox.setText(resultSet.getString(3));
-           rollNo=resultSet.getInt(3);
-           studentClass=resultSet.getString(2);
-        }
+            ResultSet resultSet;
+            resultSet=connectionStatement.executeQuery(query);
+            
+            
+            while(resultSet.next())
+            {
+                studentNameTextBox.setText(resultSet.getString(1));
+                studentClassTextBox.setText(resultSet.getString(2));
+                studentRollNoTextBox.setText(resultSet.getString(3));
+                rollNo=resultSet.getInt(3);
+                studentClass=resultSet.getString(2);
+            }
        
-        
-        query ="select subject,internal1,internal2,attendance from main where rollno="+rollNo+" and class='"+studentClass+"'";
-        resultSet=connectionStatement.executeQuery(query);
-        jTable1.setModel(DbUtils.resultSetToTableModel(resultSet));
-        connection.close();
+            query ="select subject,internal1,internal2,attendance from main where rollno="+rollNo+" and class='"+studentClass+"'";
+            
+            resultSet=connectionStatement.executeQuery(query);
+            
+            //Setting the info table according to the query result.
+            infoTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+            connection.close();
+            
        }
        catch(Exception e)
        {
@@ -99,7 +104,7 @@ public class Student extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        infoTable = new javax.swing.JTable();
         studentNameTextBox = new javax.swing.JLabel();
         studentRollNoTextBox = new javax.swing.JLabel();
         studentClassTextBox = new javax.swing.JLabel();
@@ -164,8 +169,8 @@ public class Student extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel5.setText("Roll No :");
 
-        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        infoTable.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        infoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -176,13 +181,13 @@ public class Student extends javax.swing.JFrame {
 
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTable1.setEnabled(false);
-        jTable1.setGridColor(new java.awt.Color(56, 41, 103));
-        jTable1.setRowHeight(30);
-        jTable1.setRowMargin(10);
-        jTable1.setRowSelectionAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        infoTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        infoTable.setEnabled(false);
+        infoTable.setGridColor(new java.awt.Color(56, 41, 103));
+        infoTable.setRowHeight(30);
+        infoTable.setRowMargin(10);
+        infoTable.setRowSelectionAllowed(false);
+        jScrollPane1.setViewportView(infoTable);
 
         studentNameTextBox.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
@@ -249,8 +254,9 @@ public class Student extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Method to logout and enter the login page
     private void logOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOut
-        // TODO add your handling code here:
+
         this.setVisible(false);
         Login log = new Login();
     }//GEN-LAST:event_logOut
@@ -291,6 +297,7 @@ public class Student extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable infoTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -300,7 +307,6 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel studentClassTextBox;
     private javax.swing.JLabel studentNameTextBox;
     private javax.swing.JLabel studentRollNoTextBox;

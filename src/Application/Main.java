@@ -27,9 +27,12 @@ package Application;
 /*
  * @author Aromal Anil
  */
-public class Main {
+
+public class Main 
+{
     
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         // TODO code application logic here
         Login log = new Login();
         MyDBConnection connection = new MyDBConnection();
