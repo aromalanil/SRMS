@@ -25,7 +25,9 @@ package Application;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 import net.proteanit.sql.DbUtils;
 
@@ -39,7 +41,7 @@ public class Teacher extends javax.swing.JFrame {
      * Creates new form Teacher
      */
     int teacherId;
-    String teacherName,className,selectedClass,selectedSubject;
+    String teacherName,className,selectedClass,selectedSubject,fileName;
     public Teacher()
     {
         initComponents();
@@ -48,6 +50,10 @@ public class Teacher extends javax.swing.JFrame {
         resultTable.getTableHeader().setForeground(new Color(255,255,255));
         this.setVisible(true);
         exportButton.setVisible(false);
+        fileNameTextBox.setVisible(false);
+        enterFileNameLabel.setVisible(false);
+        seperatorLine.setVisible(false);
+        csvLabel.setVisible(false);
     }
     
     void initialise()
@@ -106,6 +112,10 @@ public class Teacher extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
         exportButton = new javax.swing.JButton();
+        enterFileNameLabel = new javax.swing.JLabel();
+        fileNameTextBox = new javax.swing.JTextField();
+        seperatorLine = new javax.swing.JSeparator();
+        csvLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,7 +193,7 @@ public class Teacher extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addContainerGap(106, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(teacherNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,7 +207,7 @@ public class Teacher extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(105, 105, 105)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(103, 71, 206));
@@ -223,29 +233,22 @@ public class Teacher extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addContainerGap(384, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(298, 298, 298)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(61, 61, 61))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel2)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -264,7 +267,7 @@ public class Teacher extends javax.swing.JFrame {
         resultTable.setRowHeight(30);
         jScrollPane1.setViewportView(resultTable);
 
-        exportButton.setBackground(new java.awt.Color(126, 87, 255));
+        exportButton.setBackground(new java.awt.Color(103, 71, 206));
         exportButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         exportButton.setForeground(new java.awt.Color(255, 255, 255));
         exportButton.setText("Export");
@@ -274,6 +277,27 @@ public class Teacher extends javax.swing.JFrame {
             }
         });
 
+        enterFileNameLabel.setBackground(new java.awt.Color(255, 255, 255));
+        enterFileNameLabel.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        enterFileNameLabel.setText("Enter File Name :");
+
+        fileNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        fileNameTextBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        fileNameTextBox.setBorder(null);
+        fileNameTextBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileNameTextBoxActionPerformed(evt);
+            }
+        });
+        fileNameTextBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fileNameTextBoxKeyPressed(evt);
+            }
+        });
+
+        csvLabel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        csvLabel.setText(".csv");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -281,15 +305,20 @@ public class Teacher extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 40, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(enterFileNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fileNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(csvLabel)
+                        .addGap(34, 34, 34)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,11 +327,18 @@ public class Teacher extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(68, 68, 68)
-                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enterFileNameLabel)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(fileNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(csvLabel))
+                        .addContainerGap(77, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,54 +357,52 @@ public class Teacher extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fileNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameTextBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileNameTextBoxActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+        fileName=fileNameTextBox.getText();
+        if(fileName.isEmpty())
+        {
+            infoBox("Please Enter a valid Filename", "Error");
+        }
+        else
+        {
+         ExcelWriter ex = new ExcelWriter();
+         ex.toExcel(resultTable,fileName);
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
+
     private void logOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOut
         // TODO add your handling code here:
         this.setVisible(false);
         Login log = new Login();
     }//GEN-LAST:event_logOut
 
-    private void classListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classListActionPerformed
-        // TODO add your handling code here:
-        subjectList.removeAllItems();
-        String cl=classList.getSelectedItem().toString();
-        try
-        {
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        String query ="select subject from main where teacher ='"+teacherName+"' and class='"+cl+"' group by subject";
-        
-        ResultSet resultSet;
-        resultSet=connectionStatement.executeQuery(query);
-        while(resultSet.next())
-        {
-            subjectList.addItem(resultSet.getString(1));
-        }
-        connection.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error");
-        }
-       
-    }//GEN-LAST:event_classListActionPerformed
-
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
         // TODO add your handling code here:
         try
         {
-           MyDBConnection databaseConnection = new MyDBConnection();
-           databaseConnection.init();
-           Connection connection = databaseConnection.getMyConnection();
-           Statement connectionStatement = connection.createStatement();
-        
-         String query ="select rollno,name,internal1,internal2,attendance from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
-         ResultSet resultSet=connectionStatement.executeQuery(query);
-         resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
 
-         exportButton.setVisible(true);
-         connection.close();
+            String query ="select rollno,name,internal1,internal2,attendance from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
+            ResultSet resultSet=connectionStatement.executeQuery(query);
+            resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+               
+            
+            
+            //Showing elements for exel exporting
+            exportButton.setVisible(true);
+            fileNameTextBox.setVisible(true);
+            enterFileNameLabel.setVisible(true);
+            seperatorLine.setVisible(true);
+            csvLabel.setVisible(true);
+            connection.close();
         }
         catch(Exception e)
         {
@@ -386,12 +420,49 @@ public class Teacher extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_subjectListActionPerformed
 
-    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+    private void classListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classListActionPerformed
         // TODO add your handling code here:
-        ExcelWriter ex = new ExcelWriter();
-        ex.toExcel(resultTable);
-    }//GEN-LAST:event_exportButtonActionPerformed
+        subjectList.removeAllItems();
+        String cl=classList.getSelectedItem().toString();
+        try
+        {
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+            String query ="select subject from main where teacher ='"+teacherName+"' and class='"+cl+"' group by subject";
 
+            ResultSet resultSet;
+            resultSet=connectionStatement.executeQuery(query);
+            while(resultSet.next())
+            {
+                subjectList.addItem(resultSet.getString(1));
+            }
+            connection.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+
+    }//GEN-LAST:event_classListActionPerformed
+
+    private void fileNameTextBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fileNameTextBoxKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+            exportButton.doClick();
+        }
+    }//GEN-LAST:event_fileNameTextBoxKeyPressed
+
+    //Methord for Info box
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+
+    
     
     /**
      * @param args the command line arguments
@@ -431,7 +502,10 @@ public class Teacher extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> classList;
+    private javax.swing.JLabel csvLabel;
+    private javax.swing.JLabel enterFileNameLabel;
     private javax.swing.JButton exportButton;
+    private javax.swing.JTextField fileNameTextBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -443,6 +517,7 @@ public class Teacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable resultTable;
+    private javax.swing.JSeparator seperatorLine;
     private javax.swing.JComboBox<String> subjectList;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel teacherNameText;
