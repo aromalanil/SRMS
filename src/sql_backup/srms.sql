@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 04:51 AM
+-- Generation Time: Nov 10, 2019 at 03:20 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -39,7 +39,7 @@ CREATE TABLE `head` (
 --
 
 INSERT INTO `head` (`id`, `name`, `class`) VALUES
-(21, 'Janu Panicker', 'S5 CS B');
+(201, 'Janu Panicker', 'S5 CS B');
 
 -- --------------------------------------------------------
 

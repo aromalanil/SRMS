@@ -2,8 +2,7 @@ package Application;
 import java.sql.*;
 
 /**
- *
- * @author Anonymous from Internet & Aromal
+ * @author Aromal Anil
  */
 public class MyDBConnection {
     
@@ -24,7 +23,6 @@ public class MyDBConnection {
         catch(Exception e)
         {
             System.out.println("Failed to get connection");
-            e.printStackTrace();
         }
     }
     
