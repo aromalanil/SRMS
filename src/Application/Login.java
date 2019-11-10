@@ -34,7 +34,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login() 
+    {
         initComponents();
         this.setVisible(true);
         incorrectEntryText.setVisible(false);
@@ -67,6 +68,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1010, 690));
 
         jPanel1.setBackground(new java.awt.Color(103, 71, 206));
 
@@ -99,13 +101,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(64, 64, 64)
                 .addComponent(jLabel6)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -174,13 +176,13 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(userNameTextBox)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(incorrectEntryText))
-                                .addGap(0, 102, Short.MAX_VALUE)))))
+                                .addGap(0, 142, Short.MAX_VALUE)))))
                 .addGap(118, 118, 118))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
@@ -200,7 +202,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(incorrectEntryText)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,23 +254,23 @@ public class Login extends javax.swing.JFrame {
                 switch (userType) 
                 {
                     case "teacher":
-                        this.setVisible(false);
                         Teacher teacher = new Teacher();
                         teacher.teacherId=id;
                         teacher.teacherName=userName;
                         teacher.initialise();
+                        this.setVisible(false);
                         break;
                     case "student":
-                        this.setVisible(false);
                         Student student = new Student();
                         student.studentId=id;
                         student.initialise();
+                        this.setVisible(false);
                          break;
                     case "head":
-                        this.setVisible(false);
                         Head head = new Head();
                         head.headId=id;
                         head.initialise();
+                        this.setVisible(false);
                         break;
                     default:
                         break;
