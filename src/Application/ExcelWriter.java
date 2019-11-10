@@ -56,15 +56,17 @@ public class ExcelWriter
 
         excel.write("\n");
 
-        for(int i=0; i< model.getRowCount(); i++) {
-            for(int j=0; j < model.getColumnCount(); j++) {
+        for(int i=0; i< model.getRowCount(); i++) 
+        {
+            for(int j=0; j < model.getColumnCount(); j++) 
+            {
                 excel.write(model.getValueAt(i,j).toString()+",");
             }
             excel.write("\n");
         }
 
         excel.close();
-        infoBox(fileName+".csv is created", "Export Finish");
+        infoBox(fileName+".csv is generated", "Export Finish");
 
         }
         catch(IOException e)
