@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2019 at 03:20 PM
+-- Generation Time: Nov 10, 2019 at 07:23 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -63,6 +63,9 @@ INSERT INTO `login` (`id`, `username`, `password`, `category`) VALUES
 (2, 'abraham', 'abraham', 'student'),
 (3, 'ebin', 'ebin', 'student'),
 (4, 'aromal', 'aromal', 'student'),
+(5, 'goutham', 'goutham', 'student'),
+(6, 'aparna', 'aparna', 'student'),
+(7, 'vishnu', 'vishnu', 'student'),
 (101, 'jisy', 'jisy', 'teacher'),
 (102, 'santhi', 'santhi', 'teacher'),
 (201, 'janu', 'janu', 'head');
@@ -94,10 +97,16 @@ INSERT INTO `main` (`id`, `rollno`, `name`, `class`, `subject`, `teacher`, `inte
 (3, 1, 'Abhijith KD', 'S5 CS B', 'Java', 'santhi', 32, 34, 97),
 (4, 2, 'Abraham NT', 'S5 CS B', 'DBMS', 'jisy', 25, 30, 97),
 (5, 2, 'Abraham NT', 'S5 CS B', 'Java', 'santhi', 30, 32, 84),
-(6, 1, 'Ebin Johny', 'S5 CS A', 'Java', 'santhi', 40, 39, 84),
-(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 42, 45, 91),
+(6, 1, 'Ebin Johny', 'S5 CS A', 'Java', 'santhi', 40, 36, 84),
+(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 42, 46, 91),
 (8, 2, 'Aromal Anil', 'S5 CS A', 'Java', 'santhi', 48, 47, 92),
-(9, 2, 'Aromal Anil', 'S5 CS A', 'DBMS', 'jisy', 46, 47, 79);
+(9, 2, 'Aromal Anil', 'S5 CS A', 'DBMS', 'jisy', 46, 49, 79),
+(10, 13, 'Goutham K.G', 'S5 CS B', 'Java', 'santhi', 42, 45, 87),
+(11, 13, 'Goutham K.G', 'S5 CS B', 'DBMS', 'jisy', 32, 38, 79),
+(12, 8, 'Aparna T.S', 'S5 CS B', 'Java', 'santhi', 42, 46, 85),
+(13, 8, 'Aparna T.S', 'S5 CS B', 'DBMS', 'jisy', 44, 45, 94),
+(14, 36, 'Vishnu V', 'S5 CS A', 'Java', 'santhi', 27, 43, 92),
+(15, 36, 'Vishnu V', 'S5 CS A', 'DBMS', 'santhi', 48, 41, 76);
 
 -- --------------------------------------------------------
 
@@ -143,7 +152,10 @@ INSERT INTO `student` (`id`, `name`, `class`, `rollno`) VALUES
 (1, 'Abhijith KD', 'S5 CS B', 1),
 (2, 'Abraham NT', 'S5 CS B', 2),
 (3, 'Ebin Johny', 'S5 CS A', 1),
-(4, 'Aromal Anil', 'S5 CS A', 2);
+(4, 'Aromal Anil', 'S5 CS A', 2),
+(5, 'Goutham K.G', 'S5 CS B', 13),
+(6, 'Aparna T.S', 'S5 CS B', 8),
+(7, 'Vishnu V', 'S5 CS A', 36);
 
 -- --------------------------------------------------------
 
@@ -206,7 +218,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `main`
 --
 ALTER TABLE `main`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
