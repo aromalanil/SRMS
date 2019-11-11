@@ -569,6 +569,7 @@ public class Teacher extends javax.swing.JFrame
     private void internalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_internalButtonActionPerformed
         // TODO add your handling code here:
         resultTable.enable(true);
+        infoBox("You can now edit the table. Update internals and press DONE button", "Table is now Editable");
     }//GEN-LAST:event_internalButtonActionPerformed
 
     private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
