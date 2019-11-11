@@ -542,8 +542,8 @@ public class Teacher extends javax.swing.JFrame
              
         TableModel model = resultTable.getModel();
         
-        String queryco = "update main set name=?,internal1=?,internal2=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
-        PreparedStatement pst = connection.prepareStatement(queryco);
+        String query = "update main set name=?,internal1=?,internal2=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
+        PreparedStatement pst = connection.prepareStatement(query);
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
@@ -574,7 +574,8 @@ public class Teacher extends javax.swing.JFrame
     private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
         
         int rollNo;
-        int totalClass,attendedClass;
+        int totalClass = 0,attendedClass=0,attendance=0,flg=0;
+        String studentName;
         try
         {
          
@@ -598,8 +599,38 @@ public class Teacher extends javax.swing.JFrame
                 totalClass=resultSet.getInt(1);
                 attendedClass=resultSet.getInt(2);
             }
+            studentName=model.getValueAt(i,1).toString();
             
             
+            int input = JOptionPane.showConfirmDialog(null, "Do you like bacon?");
+            // 0=yes, 1=no, 2=cancel
+            
+            query = "update test set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
+            PreparedStatement pst = connection.prepareStatement(query);
+            switch (input) 
+            {
+                case 0:
+                        totalClass++;
+                        attendedClass++;
+                        attendance=(attendedClass/totalClass)*100;
+                        
+                        break;
+                case 1:
+                        totalClass++;
+                        attendance=(attendedClass/totalClass)*100;
+                        break;
+                case 2:
+                        infoBox("Attendance Entry Failed", "No attendance is entered into the database");
+                        break;
+                default:
+                        infoBox("Attendance Entry Failed", "No attendance is entered into the database");
+                        flg=1;
+                        break;
+            }
+            if(flg==1)
+            {
+                break;
+            }
                 
         }
         
