@@ -59,6 +59,9 @@ public class Teacher extends javax.swing.JFrame
         enterFileNameLabel.setVisible(false);
         seperatorLine.setVisible(false);
         csvLabel.setVisible(false);
+        internalButton.setVisible(false);
+        attendanceButton.setVisible(false);
+        doneButton.setVisible(false);
     }
     
     
@@ -646,6 +649,9 @@ public class Teacher extends javax.swing.JFrame
             enterFileNameLabel.setVisible(true);
             seperatorLine.setVisible(true);
             csvLabel.setVisible(true);
+            internalButton.setVisible(true);
+            attendanceButton.setVisible(true);
+            doneButton.setVisible(true);
             connection.close();
         }
         catch(Exception e)

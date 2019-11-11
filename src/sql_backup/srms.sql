@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2019 at 07:23 PM
+-- Generation Time: Nov 11, 2019 at 05:32 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -39,7 +39,8 @@ CREATE TABLE `head` (
 --
 
 INSERT INTO `head` (`id`, `name`, `class`) VALUES
-(201, 'Janu Panicker', 'S5 CS B');
+(201, 'Janu Panicker', 'S5 CS B'),
+(202, 'Manju K', 'S5 CS A');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,8 @@ INSERT INTO `login` (`id`, `username`, `password`, `category`) VALUES
 (7, 'vishnu', 'vishnu', 'student'),
 (101, 'jisy', 'jisy', 'teacher'),
 (102, 'santhi', 'santhi', 'teacher'),
-(201, 'janu', 'janu', 'head');
+(201, 'janu', 'janu', 'head'),
+(202, 'manju', 'manju', 'head');
 
 -- --------------------------------------------------------
 
@@ -85,28 +87,30 @@ CREATE TABLE `main` (
   `teacher` varchar(15) NOT NULL,
   `internal1` int(11) NOT NULL,
   `internal2` int(11) NOT NULL,
-  `attendance` int(11) NOT NULL
+  `totalclass` int(11) NOT NULL,
+  `attendedclass` int(11) NOT NULL,
+  `attendance` decimal(11,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `main`
 --
 
-INSERT INTO `main` (`id`, `rollno`, `name`, `class`, `subject`, `teacher`, `internal1`, `internal2`, `attendance`) VALUES
-(2, 1, 'Abhijith KD', 'S5 CS B', 'DBMS', 'jisy', 49, 48, 98),
-(3, 1, 'Abhijith KD', 'S5 CS B', 'Java', 'santhi', 32, 34, 97),
-(4, 2, 'Abraham NT', 'S5 CS B', 'DBMS', 'jisy', 25, 30, 97),
-(5, 2, 'Abraham NT', 'S5 CS B', 'Java', 'santhi', 30, 32, 84),
-(6, 1, 'Ebin Johny', 'S5 CS A', 'Java', 'santhi', 40, 36, 84),
-(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 42, 46, 91),
-(8, 2, 'Aromal Anil', 'S5 CS A', 'Java', 'santhi', 48, 47, 92),
-(9, 2, 'Aromal Anil', 'S5 CS A', 'DBMS', 'jisy', 46, 49, 79),
-(10, 13, 'Goutham K.G', 'S5 CS B', 'Java', 'santhi', 42, 45, 87),
-(11, 13, 'Goutham K.G', 'S5 CS B', 'DBMS', 'jisy', 32, 38, 79),
-(12, 8, 'Aparna T.S', 'S5 CS B', 'Java', 'santhi', 42, 46, 85),
-(13, 8, 'Aparna T.S', 'S5 CS B', 'DBMS', 'jisy', 44, 45, 94),
-(14, 36, 'Vishnu V', 'S5 CS A', 'Java', 'santhi', 27, 43, 92),
-(15, 36, 'Vishnu V', 'S5 CS A', 'DBMS', 'santhi', 48, 41, 76);
+INSERT INTO `main` (`id`, `rollno`, `name`, `class`, `subject`, `teacher`, `internal1`, `internal2`, `totalclass`, `attendedclass`, `attendance`) VALUES
+(2, 1, 'Abhijith KD', 'S5 CS B', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(3, 1, 'Abhijith KD', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(4, 2, 'Abraham NT', 'S5 CS B', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(5, 2, 'Abraham NT', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(6, 1, 'Ebin Johny', 'S5 CS A', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(8, 2, 'Aromal Anil', 'S5 CS A', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(9, 2, 'Aromal Anil', 'S5 CS A', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(10, 13, 'Goutham K.G', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(11, 13, 'Goutham K.G', 'S5 CS B', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(12, 8, 'Aparna T.S', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(13, 8, 'Aparna T.S', 'S5 CS B', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(14, 36, 'Vishnu V', 'S5 CS A', 'Java', 'santhi', 0, 0, 0, 0, '0'),
+(15, 36, 'Vishnu V', 'S5 CS A', 'DBMS', 'jisy', 0, 0, 0, 0, '0');
 
 -- --------------------------------------------------------
 
@@ -139,16 +143,16 @@ INSERT INTO `s5csb` (`id`, `maths_internal1`, `maths_internal2`, `maths_attendan
 
 CREATE TABLE `student` (
   `id` int(11) NOT NULL,
-  `name` varchar(15) DEFAULT NULL,
-  `class` varchar(10) DEFAULT NULL,
-  `rollno` int(11) NOT NULL
+  `NAME` varchar(15) DEFAULT NULL,
+  `CLASS` varchar(10) DEFAULT NULL,
+  `RollNo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `name`, `class`, `rollno`) VALUES
+INSERT INTO `student` (`id`, `NAME`, `CLASS`, `RollNo`) VALUES
 (1, 'Abhijith KD', 'S5 CS B', 1),
 (2, 'Abraham NT', 'S5 CS B', 2),
 (3, 'Ebin Johny', 'S5 CS A', 1),
