@@ -15,6 +15,7 @@ The users are :
 
 * Can input attendance of the students.
 * Can only input the data of the subjects which they are in charge of.
+* Export the data as Spreadsheet
 
 ## Students
 
@@ -25,6 +26,8 @@ The users are :
 ## Staff advisor
 
 * Can view all details of all students belonging to the class they are in charge of.
+* Export the data as Spreadsheet
+
 
 ## About
 
