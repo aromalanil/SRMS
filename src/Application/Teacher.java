@@ -132,11 +132,11 @@ public class Teacher extends javax.swing.JFrame
         fileNameTextBox = new javax.swing.JTextField();
         seperatorLine = new javax.swing.JSeparator();
         csvLabel = new javax.swing.JLabel();
-        editButton = new javax.swing.JButton();
+        internalButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
+        attendanceButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1010, 690));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -212,7 +212,7 @@ public class Teacher extends javax.swing.JFrame
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(teacherNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +226,7 @@ public class Teacher extends javax.swing.JFrame
                     .addComponent(jLabel7))
                 .addGap(105, 105, 105)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(103, 71, 206));
@@ -299,7 +299,7 @@ public class Teacher extends javax.swing.JFrame
 
         enterFileNameLabel.setBackground(new java.awt.Color(255, 255, 255));
         enterFileNameLabel.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        enterFileNameLabel.setText("Enter File ame :");
+        enterFileNameLabel.setText("Enter File Name :");
 
         fileNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         fileNameTextBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -313,13 +313,13 @@ public class Teacher extends javax.swing.JFrame
         csvLabel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         csvLabel.setText(".csv");
 
-        editButton.setBackground(new java.awt.Color(103, 71, 206));
-        editButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
-        editButton.setForeground(new java.awt.Color(255, 255, 255));
-        editButton.setText("Edit");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        internalButton.setBackground(new java.awt.Color(103, 71, 206));
+        internalButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        internalButton.setForeground(new java.awt.Color(255, 255, 255));
+        internalButton.setText("Edit Internals");
+        internalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                internalButtonActionPerformed(evt);
             }
         });
 
@@ -333,6 +333,16 @@ public class Teacher extends javax.swing.JFrame
             }
         });
 
+        attendanceButton.setBackground(new java.awt.Color(103, 71, 206));
+        attendanceButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        attendanceButton.setForeground(new java.awt.Color(255, 255, 255));
+        attendanceButton.setText("Mark Attendance");
+        attendanceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attendanceButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -341,7 +351,7 @@ public class Teacher extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(enterFileNameLabel)
@@ -354,8 +364,10 @@ public class Teacher extends javax.swing.JFrame
                         .addGap(34, 34, 34)
                         .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(editButton)
+                        .addComponent(internalButton)
                         .addGap(18, 18, 18)
+                        .addComponent(attendanceButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(doneButton)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -366,13 +378,14 @@ public class Teacher extends javax.swing.JFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(editButton)
-                            .addComponent(doneButton))
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                        .addGap(40, 40, 40)
+                            .addComponent(internalButton)
+                            .addComponent(doneButton)
+                            .addComponent(attendanceButton))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(enterFileNameLabel)
@@ -381,7 +394,7 @@ public class Teacher extends javax.swing.JFrame
                                 .addGap(0, 0, 0)
                                 .addComponent(seperatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(csvLabel))
-                        .addGap(47, 47, 47))))
+                        .addContainerGap(47, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -553,10 +566,49 @@ public class Teacher extends javax.swing.JFrame
         }
     }//GEN-LAST:event_doneButtonActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+    private void internalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_internalButtonActionPerformed
         // TODO add your handling code here:
         resultTable.enable(true);
-    }//GEN-LAST:event_editButtonActionPerformed
+    }//GEN-LAST:event_internalButtonActionPerformed
+
+    private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
+        
+        int rollNo;
+        int totalClass,attendedClass;
+        try
+        {
+         
+  
+        MyDBConnection databaseConnection = new MyDBConnection();
+        databaseConnection.init();
+        Connection connection = databaseConnection.getMyConnection();
+        Statement connectionStatement = connection.createStatement();
+             
+        TableModel model = resultTable.getModel();
+
+        ResultSet resultSet;
+        
+        for(int i=0; i< model.getRowCount(); i++) 
+        {
+            rollNo=Integer.parseInt(model.getValueAt(i,0).toString());
+            String query ="select totalclass,attendedclass from test where(teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
+            resultSet=connectionStatement.executeQuery(query);
+            if(resultSet.next())
+            {
+                totalClass=resultSet.getInt(1);
+                attendedClass=resultSet.getInt(2);
+            }
+            
+            
+                
+        }
+        
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_attendanceButtonActionPerformed
 
     //Methord for Info box
     public static void infoBox(String infoMessage, String titleBar)
@@ -602,13 +654,14 @@ public class Teacher extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton attendanceButton;
     private javax.swing.JComboBox<String> classList;
     private javax.swing.JLabel csvLabel;
     private javax.swing.JButton doneButton;
-    private javax.swing.JButton editButton;
     private javax.swing.JLabel enterFileNameLabel;
     private javax.swing.JButton exportButton;
     private javax.swing.JTextField fileNameTextBox;
+    private javax.swing.JButton internalButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
