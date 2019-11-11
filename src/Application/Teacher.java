@@ -299,7 +299,7 @@ public class Teacher extends javax.swing.JFrame
 
         enterFileNameLabel.setBackground(new java.awt.Color(255, 255, 255));
         enterFileNameLabel.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        enterFileNameLabel.setText("Enter File Name :");
+        enterFileNameLabel.setText("Enter File ame :");
 
         fileNameTextBox.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         fileNameTextBox.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -366,7 +366,7 @@ public class Teacher extends javax.swing.JFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(editButton)
                             .addComponent(doneButton))
