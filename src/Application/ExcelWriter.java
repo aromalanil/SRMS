@@ -66,7 +66,7 @@ public class ExcelWriter
         }
 
         excel.close();
-        infoBox(fileName+".csv is generated", "Export Finish");
+        infoBox(fileName+".csv is generated", "Export Finished");
 
         }
         catch(IOException e)
