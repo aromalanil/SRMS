@@ -574,7 +574,8 @@ public class Teacher extends javax.swing.JFrame
     private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
         
         int rollNo;
-        int totalClass = 0,attendedClass=0,attendance=0,flg=0;
+        int totalClass = 0,attendedClass=0,flg=0;
+        float attendance=0;
         String studentName;
         try
         {
@@ -584,27 +585,29 @@ public class Teacher extends javax.swing.JFrame
         databaseConnection.init();
         Connection connection = databaseConnection.getMyConnection();
         Statement connectionStatement = connection.createStatement();
-             
+        ResultSet resultSet;     
         TableModel model = resultTable.getModel();
 
-        ResultSet resultSet;
-        String queryco = "update test set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
+        
+        String queryco = "update main set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
         PreparedStatement pst = connection.prepareStatement(queryco);
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
             rollNo=Integer.parseInt(model.getValueAt(i,0).toString());
-            String query ="select totalclass,attendedclass from test where(teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
+            String query ="select totalclass,attendedclass from main where(teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
             resultSet=connectionStatement.executeQuery(query);
             if(resultSet.next())
             {
                 totalClass=resultSet.getInt(1);
                 attendedClass=resultSet.getInt(2);
+               
             }
+            
             studentName=model.getValueAt(i,1).toString();
             
             
-            int input = JOptionPane.showConfirmDialog(null, "Do you like bacon?");
+            int input = JOptionPane.showConfirmDialog(null, "Mark attendance of "+studentName+" ?");
             // 0=yes, 1=no, 2=cancel
             
             
@@ -613,11 +616,13 @@ public class Teacher extends javax.swing.JFrame
                 case 0:
                         totalClass++;
                         attendedClass++;
-                        attendance=(attendedClass/totalClass)*100;
+                        attendance=(float) ((double)attendedClass/(double)totalClass)*100;
+                        System.out.println(totalClass+" "+attendedClass+" "+attendance);
                         break;
                 case 1:
                         totalClass++;
-                        attendance=(attendedClass/totalClass)*100;
+                        attendance=(float) ((double)attendedClass/(double)totalClass)*100;
+                        System.out.println(totalClass+" "+attendedClass+" "+attendance);
                         break;
                 case 2:
                         flg=1;
@@ -634,13 +639,13 @@ public class Teacher extends javax.swing.JFrame
             }
             pst.setInt(1, totalClass);
             pst.setInt(2, attendedClass);
-            pst.setInt(3, attendance);
+            pst.setInt(3, (int) attendance);
             pst.setInt(4,Integer.parseInt(model.getValueAt(i,0).toString()));
-                
+            System.out.println(pst);
+            pst.execute();    
         }
-        
-        pst.executeBatch();
-        
+        connection.close();
+        submitButton.doClick();
         }
         catch(Exception e)
         {
