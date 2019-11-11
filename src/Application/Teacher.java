@@ -588,6 +588,8 @@ public class Teacher extends javax.swing.JFrame
         TableModel model = resultTable.getModel();
 
         ResultSet resultSet;
+        String queryco = "update test set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
+        PreparedStatement pst = connection.prepareStatement(queryco);
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
@@ -605,21 +607,20 @@ public class Teacher extends javax.swing.JFrame
             int input = JOptionPane.showConfirmDialog(null, "Do you like bacon?");
             // 0=yes, 1=no, 2=cancel
             
-            query = "update test set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
-            PreparedStatement pst = connection.prepareStatement(query);
+            
             switch (input) 
             {
                 case 0:
                         totalClass++;
                         attendedClass++;
                         attendance=(attendedClass/totalClass)*100;
-                        
                         break;
                 case 1:
                         totalClass++;
                         attendance=(attendedClass/totalClass)*100;
                         break;
                 case 2:
+                        flg=1;
                         infoBox("Attendance Entry Failed", "No attendance is entered into the database");
                         break;
                 default:
@@ -631,8 +632,14 @@ public class Teacher extends javax.swing.JFrame
             {
                 break;
             }
+            pst.setInt(1, totalClass);
+            pst.setInt(2, attendedClass);
+            pst.setInt(3, attendance);
+            pst.setInt(4,Integer.parseInt(model.getValueAt(i,0).toString()));
                 
         }
+        
+        pst.executeBatch();
         
         }
         catch(Exception e)
