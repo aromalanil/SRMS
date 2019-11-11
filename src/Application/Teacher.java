@@ -178,9 +178,9 @@ public class Teacher extends javax.swing.JFrame
         submitButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         submitButton.setForeground(new java.awt.Color(126, 87, 255));
         submitButton.setText("SUBMIT");
-        submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                submitButtonMouseClicked(evt);
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
             }
         });
 
@@ -441,38 +441,6 @@ public class Teacher extends javax.swing.JFrame
         
     }//GEN-LAST:event_logOut
     
-    //To fetch and display the student data of selected class and subject
-    private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-
-        try
-        {
-            MyDBConnection databaseConnection = new MyDBConnection();
-            databaseConnection.init();
-            Connection connection = databaseConnection.getMyConnection();
-            Statement connectionStatement = connection.createStatement();
-
-            String query ="select RollNo,NAME,INTERNAL1,INTERNAL2,ATTENDANCE from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
-            
-            ResultSet resultSet=connectionStatement.executeQuery(query);
-            
-            //Setting table according to resultset
-            resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
-               
-            
-            //Showing elements for Excel exporting
-            exportButton.setVisible(true);
-            fileNameTextBox.setVisible(true);
-            enterFileNameLabel.setVisible(true);
-            seperatorLine.setVisible(true);
-            csvLabel.setVisible(true);
-            connection.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error"+e);
-        }
-    }//GEN-LAST:event_submitButtonMouseClicked
-
     //Method to add the selected class and subject to variables
     private void subjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectListActionPerformed
         
@@ -532,7 +500,7 @@ public class Teacher extends javax.swing.JFrame
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
 
-
+        
         try
         {
             
@@ -653,6 +621,38 @@ public class Teacher extends javax.swing.JFrame
             System.err.println(e);
         }
     }//GEN-LAST:event_attendanceButtonActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        
+        try
+        {
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+
+            String query ="select RollNo,NAME,INTERNAL1,INTERNAL2,ATTENDANCE from main where teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"'";
+            
+            ResultSet resultSet=connectionStatement.executeQuery(query);
+            
+            //Setting table according to resultset
+            resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
+               
+            
+            //Showing elements for Excel exporting
+            exportButton.setVisible(true);
+            fileNameTextBox.setVisible(true);
+            enterFileNameLabel.setVisible(true);
+            seperatorLine.setVisible(true);
+            csvLabel.setVisible(true);
+            connection.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error"+e);
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     //Methord for Info box
     public static void infoBox(String infoMessage, String titleBar)
