@@ -62,6 +62,7 @@ public class Teacher extends javax.swing.JFrame
         internalButton.setVisible(false);
         attendanceButton.setVisible(false);
         doneButton.setVisible(false);
+        scrollPanel.setVisible(false);
     }
     
     
@@ -128,7 +129,7 @@ public class Teacher extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPanel = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
         exportButton = new javax.swing.JButton();
         enterFileNameLabel = new javax.swing.JLabel();
@@ -274,6 +275,9 @@ public class Teacher extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        scrollPanel.setBackground(new java.awt.Color(255, 255, 255));
+        scrollPanel.setBorder(null);
+
         resultTable.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,7 +292,7 @@ public class Teacher extends javax.swing.JFrame
         ));
         resultTable.setEnabled(false);
         resultTable.setRowHeight(30);
-        jScrollPane1.setViewportView(resultTable);
+        scrollPanel.setViewportView(resultTable);
 
         exportButton.setBackground(new java.awt.Color(103, 71, 206));
         exportButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -355,7 +359,7 @@ public class Teacher extends javax.swing.JFrame
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(enterFileNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -387,7 +391,7 @@ public class Teacher extends javax.swing.JFrame
                             .addComponent(doneButton)
                             .addComponent(attendanceButton))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,17 +645,18 @@ public class Teacher extends javax.swing.JFrame
             
             //Setting table according to resultset
             resultTable.setModel(DbUtils.resultSetToTableModel(resultSet));
-               
+            scrollPanel.setVisible(true);   
             
             //Showing elements for Excel exporting
-            exportButton.setVisible(true);
+            internalButton.setVisible(true);
+            attendanceButton.setVisible(true);
+            doneButton.setVisible(true);
             fileNameTextBox.setVisible(true);
             enterFileNameLabel.setVisible(true);
             seperatorLine.setVisible(true);
             csvLabel.setVisible(true);
-            internalButton.setVisible(true);
-            attendanceButton.setVisible(true);
-            doneButton.setVisible(true);
+            exportButton.setVisible(true);
+
             connection.close();
         }
         catch(Exception e)
@@ -721,8 +726,8 @@ public class Teacher extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable resultTable;
+    private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JSeparator seperatorLine;
     private javax.swing.JComboBox<String> subjectList;
     private javax.swing.JButton submitButton;
