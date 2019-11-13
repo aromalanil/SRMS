@@ -56,7 +56,7 @@ public class Teacher extends javax.swing.JFrame
         
         this.setVisible(true);
         
-        //Hiding elements for export option
+        //Hiding elements related to the table and the table itself
         exportButton.setVisible(false);
         fileNameTextBox.setVisible(false);
         enterFileNameLabel.setVisible(false);
@@ -70,11 +70,11 @@ public class Teacher extends javax.swing.JFrame
     
     
     //Method to initialise the details of the logged person
-    
     void initialise()
     {
        try
        {
+            //Creating a new Database Connection   
             MyDBConnection databaseConnection = new MyDBConnection();
             databaseConnection.init();
             Connection connection = databaseConnection.getMyConnection();
@@ -86,8 +86,10 @@ public class Teacher extends javax.swing.JFrame
             ResultSet resultSet;
             resultSet=connectionStatement.executeQuery(query);
             
+            //If query gave an output
             if(resultSet.next())
             {
+                //Setting the name of teacher
                 teacherNameText.setText(resultSet.getString(1));
             }
             
@@ -464,7 +466,7 @@ public class Teacher extends javax.swing.JFrame
         
     }//GEN-LAST:event_logOut
     
-    //Method to add the selected class and subject to variables
+    //Method to add the selected classes and subjects to variables
     private void subjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectListActionPerformed
         
         //Only excectutes when subjectlist is not empty 
@@ -472,7 +474,7 @@ public class Teacher extends javax.swing.JFrame
         {
             selectedClass=classList.getSelectedItem().toString();
             selectedSubject=subjectList.getSelectedItem().toString();
-            System.out.println("Selected Combination :"+selectedClass+" "+selectedSubject);
+            System.out.println("Selected Combination : "+selectedClass+" "+selectedSubject);
         }
         
     }//GEN-LAST:event_subjectListActionPerformed
@@ -481,9 +483,10 @@ public class Teacher extends javax.swing.JFrame
 
         //The subjects present now may be those of previous class so remove them.
         subjectList.removeAllItems();
-        String cl=classList.getSelectedItem().toString();
+        selectedClass=classList.getSelectedItem().toString();
         try
         {
+            //Creating a new Database Connection
             MyDBConnection databaseConnection = new MyDBConnection();
             databaseConnection.init();
             Connection connection = databaseConnection.getMyConnection();
@@ -491,7 +494,7 @@ public class Teacher extends javax.swing.JFrame
             
             
             //Getting Subject list of selected Class
-            String query ="select subject from main where teacher ='"+teacherName+"' and class='"+cl+"' group by subject";
+            String query ="select subject from main where teacher ='"+teacherName+"' and class='"+selectedClass+"' group by subject";
 
             ResultSet resultSet;
             resultSet=connectionStatement.executeQuery(query);
@@ -521,20 +524,21 @@ public class Teacher extends javax.swing.JFrame
         }
     }//GEN-LAST:event_fileNameTextBoxKeyPressed
 
+    //Updating the database according to the editted student details
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
 
-        
         try
         {
             
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
+            //Creating a new Database Connection   
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
              
-        TableModel model = resultTable.getModel();
+            TableModel model = resultTable.getModel();
         
-        String query = "update main set name=?,internal1=?,internal2=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
-        PreparedStatement pst = connection.prepareStatement(query);
+            String query = "update main set name=?,internal1=?,internal2=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
+            PreparedStatement pst = connection.prepareStatement(query);
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
@@ -557,38 +561,41 @@ public class Teacher extends javax.swing.JFrame
         }
     }//GEN-LAST:event_doneButtonActionPerformed
 
+    //Making the table editable for entering the internal marks
     private void internalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_internalButtonActionPerformed
-        // TODO add your handling code here:
+
         resultTable.enable(true);
         infoBox("You can now edit the table. Update internals and press DONE button", "Table is now Editable");
+        
     }//GEN-LAST:event_internalButtonActionPerformed
 
+    //Method for entering the attendance of each student in the list
     private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
         
         int rollNo;
         int totalClass = 0,attendedClass=0,flg=0;
         float attendance=0;
         String studentName;
+        
         try
         {
-         
-  
-        MyDBConnection databaseConnection = new MyDBConnection();
-        databaseConnection.init();
-        Connection connection = databaseConnection.getMyConnection();
-        Statement connectionStatement = connection.createStatement();
-        ResultSet resultSet;     
-        TableModel model = resultTable.getModel();
+            //Creating a new Database Connection
+            MyDBConnection databaseConnection = new MyDBConnection();
+            databaseConnection.init();
+            Connection connection = databaseConnection.getMyConnection();
+            Statement connectionStatement = connection.createStatement();
+            ResultSet resultSet;     
+            TableModel model = resultTable.getModel();
 
         
-        String queryco = "update main set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
-        PreparedStatement pst = connection.prepareStatement(queryco);
+            String queryOne = "update main set totalclass=?,attendedclass=?,attendance=? where (teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno =?)";
+            PreparedStatement pst = connection.prepareStatement(queryOne);
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
             rollNo=Integer.parseInt(model.getValueAt(i,0).toString());
-            String query ="select totalclass,attendedclass from main where(teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
-            resultSet=connectionStatement.executeQuery(query);
+            String queryTwo ="select totalclass,attendedclass from main where(teacher='"+teacherName+"' and class='"+selectedClass+"' and subject='"+selectedSubject+"' and rollno ="+rollNo+")";
+            resultSet=connectionStatement.executeQuery(queryTwo);
             if(resultSet.next())
             {
                 totalClass=resultSet.getInt(1);
@@ -629,12 +636,14 @@ public class Teacher extends javax.swing.JFrame
             {
                 break;
             }
+            
             pst.setInt(1, totalClass);
             pst.setInt(2, attendedClass);
             pst.setInt(3, (int) attendance);
             pst.setInt(4,Integer.parseInt(model.getValueAt(i,0).toString()));
             System.out.println(pst);
-            pst.execute();    
+            pst.execute();  
+            
         }
         connection.close();
         submitButton.doClick();
@@ -645,11 +654,12 @@ public class Teacher extends javax.swing.JFrame
         }
     }//GEN-LAST:event_attendanceButtonActionPerformed
 
+    //Method to fetch details of selected class and subject and display it in the table
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
         
         try
         {
+            //Creating a new Database Connection
             MyDBConnection databaseConnection = new MyDBConnection();
             databaseConnection.init();
             Connection connection = databaseConnection.getMyConnection();

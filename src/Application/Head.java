@@ -54,11 +54,12 @@ public class Head extends javax.swing.JFrame {
         
     }
 
-    
+     //Method to initialise the details of the logged person   
      void initialise() 
      {
        try
        {
+            //Creating a new Database Connection
             MyDBConnection databaseConnection = new MyDBConnection();
             databaseConnection.init();
             Connection connection = databaseConnection.getMyConnection();
@@ -70,11 +71,11 @@ public class Head extends javax.swing.JFrame {
             resultSet=connectionStatement.executeQuery(query);
             
             
-            while(resultSet.next())
+            if(resultSet.next())
             {
-            headNameText.setText(resultSet.getString(1));
-            headClassText.setText(resultSet.getString(2));
-            headClass=resultSet.getString(2);
+                headNameText.setText(resultSet.getString(1));
+                headClass=resultSet.getString(2);
+                headClassText.setText(headClass);
             }
         
             query ="select RollNo,NAME,SUBJECT,INTERNAL1,INTERNAL2,ATTENDANCE from main where class='"+headClass+"' order by subject";

@@ -26,14 +26,11 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 
 /**
- *
  * @author Aromal Anil
  */
+
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() 
     {
         initComponents();
@@ -231,7 +228,8 @@ public class Login extends javax.swing.JFrame {
     //Excecute when Login Button is pressed
     
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+
+        
         int id;
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
@@ -251,11 +249,17 @@ public class Login extends javax.swing.JFrame {
          
           //If query gave an output
           if(resultSet.next())
-          {   
+          { 
+              
+            //Checcking if password is correct
             if(password.equals(resultSet.getString(3)))
-            {    
-             String userType=resultSet.getString(1);
+            {   
+                
+                //Getting the type of user and user id
+                String userType=resultSet.getString(1);
                 id=resultSet.getInt(2);
+                
+                //Redirecting the user according to their category
                 switch (userType) 
                 {
                     case "teacher":
@@ -294,7 +298,7 @@ public class Login extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            System.out.println("Connection error");
+            System.out.println("Connection Error"+e);
         }
         
     }//GEN-LAST:event_loginButtonActionPerformed

@@ -50,6 +50,8 @@ public class Student extends javax.swing.JFrame
         infoTable.getTableHeader().setForeground(new Color(255,255,255));
         
     }
+    
+    //Method to initialise the details of the logged person
     void initialise()
     {
        try
