@@ -46,6 +46,9 @@ public class Teacher extends javax.swing.JFrame
     {
         initComponents();
         
+        //Setting Frame to centre of the screen
+        this.setLocationRelativeTo(null);
+                        
         //Table Customisation
         resultTable.getTableHeader().setBackground(new Color(103,71,206));
         resultTable.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
@@ -158,6 +161,7 @@ public class Teacher extends javax.swing.JFrame
         classList.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         classList.setForeground(new java.awt.Color(126, 87, 255));
         classList.setBorder(null);
+        classList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         classList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 classListActionPerformed(evt);
@@ -171,7 +175,7 @@ public class Teacher extends javax.swing.JFrame
         subjectList.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         subjectList.setForeground(new java.awt.Color(126, 87, 255));
         subjectList.setBorder(null);
-        subjectList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        subjectList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         subjectList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subjectListActionPerformed(evt);
@@ -182,6 +186,8 @@ public class Teacher extends javax.swing.JFrame
         submitButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         submitButton.setForeground(new java.awt.Color(126, 87, 255));
         submitButton.setText("SUBMIT");
+        submitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        submitButton.setFocusPainted(false);
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
@@ -241,10 +247,12 @@ public class Teacher extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Teacher Login");
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raw/logout_icon.png"))); // NOI18N
+        jLabel8.setText("Logout");
         jLabel8.setToolTipText("");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOut(evt);
@@ -256,11 +264,11 @@ public class Teacher extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(344, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(48, 48, 48))
         );
@@ -298,6 +306,8 @@ public class Teacher extends javax.swing.JFrame
         exportButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         exportButton.setForeground(new java.awt.Color(255, 255, 255));
         exportButton.setText("Export");
+        exportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exportButton.setFocusPainted(false);
         exportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportButtonActionPerformed(evt);
@@ -324,6 +334,8 @@ public class Teacher extends javax.swing.JFrame
         internalButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
         internalButton.setForeground(new java.awt.Color(255, 255, 255));
         internalButton.setText("Edit Internals");
+        internalButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        internalButton.setFocusPainted(false);
         internalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 internalButtonActionPerformed(evt);
@@ -334,6 +346,8 @@ public class Teacher extends javax.swing.JFrame
         doneButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
         doneButton.setForeground(new java.awt.Color(255, 255, 255));
         doneButton.setText("Done");
+        doneButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        doneButton.setFocusPainted(false);
         doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doneButtonActionPerformed(evt);
@@ -344,6 +358,8 @@ public class Teacher extends javax.swing.JFrame
         attendanceButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
         attendanceButton.setForeground(new java.awt.Color(255, 255, 255));
         attendanceButton.setText("Mark Attendance");
+        attendanceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        attendanceButton.setFocusPainted(false);
         attendanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 attendanceButtonActionPerformed(evt);

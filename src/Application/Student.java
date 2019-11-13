@@ -40,6 +40,10 @@ public class Student extends javax.swing.JFrame
     public Student() 
     {
         initComponents();
+        
+        //Setting Frame to centre of the screen
+        this.setLocationRelativeTo(null);
+        
         this.setVisible(true);
         infoTable.getTableHeader().setBackground(new Color(103,71,206));
         infoTable.getTableHeader().setFont (new Font("Century Gothic", Font.BOLD,18));
@@ -122,10 +126,12 @@ public class Student extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Student Login");
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raw/logout_icon.png"))); // NOI18N
+        jLabel6.setText("Logout");
         jLabel6.setToolTipText("");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOut(evt);
@@ -137,11 +143,11 @@ public class Student extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(313, Short.MAX_VALUE)
+                .addContainerGap(289, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(48, 48, 48))
         );
