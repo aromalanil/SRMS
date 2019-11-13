@@ -207,6 +207,8 @@ public class Head extends javax.swing.JFrame {
         exportButton.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         exportButton.setForeground(new java.awt.Color(255, 255, 255));
         exportButton.setText("Export");
+        exportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exportButton.setFocusPainted(false);
         exportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportButtonActionPerformed(evt);

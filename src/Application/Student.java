@@ -74,7 +74,7 @@ public class Student extends javax.swing.JFrame
                 studentClass=resultSet.getString(2);
             }
        
-            query ="select subject,internal1,internal2,attendance from main where rollno="+rollNo+" and class='"+studentClass+"'";
+            query ="select SUBJECT,INTERNAL1,INTERNAL2,ATTENDANCE from main where rollno="+rollNo+" and class='"+studentClass+"'";
             
             resultSet=connectionStatement.executeQuery(query);
             
