@@ -70,7 +70,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="internalButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="attendanceButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="editAttendanceButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="markAttendanceButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="doneButton" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -90,7 +92,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="internalButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="doneButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="attendanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="markAttendanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="editAttendanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="scrollPanel" min="-2" pref="257" max="-2" attributes="0"/>
@@ -496,7 +499,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doneButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="attendanceButton">
+        <Component class="javax.swing.JButton" name="markAttendanceButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ce" green="47" red="67" type="rgb"/>
@@ -514,7 +517,28 @@
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="attendanceButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="markAttendanceButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="editAttendanceButton">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ce" green="47" red="67" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="13" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Edit Attendance"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+            <Property name="focusPainted" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editAttendanceButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

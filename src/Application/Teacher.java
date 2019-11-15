@@ -41,7 +41,8 @@ public class Teacher extends javax.swing.JFrame
         seperatorLine.setVisible(false);
         csvLabel.setVisible(false);
         internalButton.setVisible(false);
-        attendanceButton.setVisible(false);
+        editAttendanceButton.setVisible(false);
+        markAttendanceButton.setVisible(false);
         doneButton.setVisible(false);
         scrollPanel.setVisible(false);
     }
@@ -121,7 +122,8 @@ public class Teacher extends javax.swing.JFrame
         csvLabel = new javax.swing.JLabel();
         internalButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
-        attendanceButton = new javax.swing.JButton();
+        markAttendanceButton = new javax.swing.JButton();
+        editAttendanceButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -334,15 +336,27 @@ public class Teacher extends javax.swing.JFrame
             }
         });
 
-        attendanceButton.setBackground(new java.awt.Color(103, 71, 206));
-        attendanceButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
-        attendanceButton.setForeground(new java.awt.Color(255, 255, 255));
-        attendanceButton.setText("Mark Attendance");
-        attendanceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        attendanceButton.setFocusPainted(false);
-        attendanceButton.addActionListener(new java.awt.event.ActionListener() {
+        markAttendanceButton.setBackground(new java.awt.Color(103, 71, 206));
+        markAttendanceButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        markAttendanceButton.setForeground(new java.awt.Color(255, 255, 255));
+        markAttendanceButton.setText("Mark Attendance");
+        markAttendanceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        markAttendanceButton.setFocusPainted(false);
+        markAttendanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                attendanceButtonActionPerformed(evt);
+                markAttendanceButtonActionPerformed(evt);
+            }
+        });
+
+        editAttendanceButton.setBackground(new java.awt.Color(103, 71, 206));
+        editAttendanceButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        editAttendanceButton.setForeground(new java.awt.Color(255, 255, 255));
+        editAttendanceButton.setText("Edit Attendance");
+        editAttendanceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editAttendanceButton.setFocusPainted(false);
+        editAttendanceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAttendanceButtonActionPerformed(evt);
             }
         });
 
@@ -369,7 +383,9 @@ public class Teacher extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(internalButton)
                         .addGap(18, 18, 18)
-                        .addComponent(attendanceButton)
+                        .addComponent(editAttendanceButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(markAttendanceButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(doneButton)))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -385,7 +401,8 @@ public class Teacher extends javax.swing.JFrame
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(internalButton)
                             .addComponent(doneButton)
-                            .addComponent(attendanceButton))
+                            .addComponent(markAttendanceButton)
+                            .addComponent(editAttendanceButton))
                         .addGap(30, 30, 30)
                         .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
@@ -548,7 +565,7 @@ public class Teacher extends javax.swing.JFrame
     }//GEN-LAST:event_internalButtonActionPerformed
 
     //Method for entering the attendance of each student in the list
-    private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
+    private void markAttendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markAttendanceButtonActionPerformed
         
         int rollNo;
         int totalClass = 0,attendedClass=0,flg=0;
@@ -630,7 +647,7 @@ public class Teacher extends javax.swing.JFrame
         {
             System.err.println(e);
         }
-    }//GEN-LAST:event_attendanceButtonActionPerformed
+    }//GEN-LAST:event_markAttendanceButtonActionPerformed
 
     //Method to fetch details of selected class and subject and display it in the table
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -653,7 +670,8 @@ public class Teacher extends javax.swing.JFrame
             
             //Showing elements for Excel exporting
             internalButton.setVisible(true);
-            attendanceButton.setVisible(true);
+            editAttendanceButton.setVisible(true);
+            markAttendanceButton.setVisible(true);
             doneButton.setVisible(true);
             fileNameTextBox.setVisible(true);
             enterFileNameLabel.setVisible(true);
@@ -668,6 +686,16 @@ public class Teacher extends javax.swing.JFrame
             System.out.println("Error"+e);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void editAttendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAttendanceButtonActionPerformed
+        
+        Attendance attendance = new Attendance();
+        attendance.selectedClass=selectedClass;
+        attendance.selectedSubject=selectedSubject;
+        attendance.teacherName=teacherName;
+        attendance.initialise();
+        
+    }//GEN-LAST:event_editAttendanceButtonActionPerformed
 
     //Methord for Info box
     public static void infoBox(String infoMessage, String titleBar)
@@ -713,10 +741,10 @@ public class Teacher extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton attendanceButton;
     private javax.swing.JComboBox<String> classList;
     private javax.swing.JLabel csvLabel;
     private javax.swing.JButton doneButton;
+    private javax.swing.JButton editAttendanceButton;
     private javax.swing.JLabel enterFileNameLabel;
     private javax.swing.JButton exportButton;
     private javax.swing.JTextField fileNameTextBox;
@@ -730,6 +758,7 @@ public class Teacher extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton markAttendanceButton;
     public javax.swing.JTable resultTable;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JSeparator seperatorLine;

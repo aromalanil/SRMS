@@ -15,7 +15,7 @@ public class Login extends javax.swing.JFrame {
         
         //Setting Frame to centre of the screen
         this.setLocationRelativeTo(null);
-        
+           
         this.setVisible(true);
         incorrectEntryText.setVisible(false);
     }
