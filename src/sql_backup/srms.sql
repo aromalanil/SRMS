@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 05:32 PM
+-- Generation Time: Nov 15, 2019 at 05:10 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -102,7 +102,7 @@ INSERT INTO `main` (`id`, `rollno`, `name`, `class`, `subject`, `teacher`, `inte
 (4, 2, 'Abraham NT', 'S5 CS B', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
 (5, 2, 'Abraham NT', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
 (6, 1, 'Ebin Johny', 'S5 CS A', 'Java', 'santhi', 0, 0, 0, 0, '0'),
-(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
+(7, 1, 'Ebin Johny', 'S5 CS A', 'DBMS', 'jisy', 1, 0, 0, 0, '0'),
 (8, 2, 'Aromal Anil', 'S5 CS A', 'Java', 'santhi', 0, 0, 0, 0, '0'),
 (9, 2, 'Aromal Anil', 'S5 CS A', 'DBMS', 'jisy', 0, 0, 0, 0, '0'),
 (10, 13, 'Goutham K.G', 'S5 CS B', 'Java', 'santhi', 0, 0, 0, 0, '0'),
@@ -145,21 +145,24 @@ CREATE TABLE `student` (
   `id` int(11) NOT NULL,
   `NAME` varchar(15) DEFAULT NULL,
   `CLASS` varchar(10) DEFAULT NULL,
-  `RollNo` int(11) NOT NULL
+  `RollNo` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `guardian` varchar(20) NOT NULL,
+  `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `NAME`, `CLASS`, `RollNo`) VALUES
-(1, 'Abhijith KD', 'S5 CS B', 1),
-(2, 'Abraham NT', 'S5 CS B', 2),
-(3, 'Ebin Johny', 'S5 CS A', 1),
-(4, 'Aromal Anil', 'S5 CS A', 2),
-(5, 'Goutham K.G', 'S5 CS B', 13),
-(6, 'Aparna T.S', 'S5 CS B', 8),
-(7, 'Vishnu V', 'S5 CS A', 36);
+INSERT INTO `student` (`id`, `NAME`, `CLASS`, `RollNo`, `email`, `guardian`, `dob`) VALUES
+(1, 'Abhijith KD', 'S5 CS B', 1, 'abhijith@gmail.com', 'Dileep', '1999-03-24'),
+(2, 'Abraham NT', 'S5 CS B', 2, 'abraham@gmail.com', 'abraham_guardian', '1999-11-08'),
+(3, 'Ebin Johny', 'S5 CS A', 1, 'ebin@gmail.com', 'Senchonese', '1999-07-01'),
+(4, 'Aromal Anil', 'S5 CS A', 2, 'aromal@gmail.com', 'Anil', '1999-02-10'),
+(5, 'Goutham K.G', 'S5 CS B', 13, 'goutham@yahoo.com', 'Giri', '1999-05-16'),
+(6, 'Aparna T.S', 'S5 CS B', 8, 'aparna@gmail.com', 'Sivan', '1999-09-20'),
+(7, 'Vishnu V', 'S5 CS A', 36, 'vishnu32@gmail.com', 'Vishvambharan', '1999-02-08');
 
 -- --------------------------------------------------------
 
