@@ -694,7 +694,6 @@ public class Teacher extends javax.swing.JFrame
         attendance.selectedSubject=selectedSubject;
         attendance.teacherName=teacherName;
         attendance.initialise();
-        
     }//GEN-LAST:event_editAttendanceButtonActionPerformed
 
     //Methord for Info box

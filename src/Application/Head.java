@@ -94,6 +94,7 @@ public class Head extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         exportButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        personalDetailsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1010, 690));
@@ -197,6 +198,18 @@ public class Head extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText(".csv");
 
+        personalDetailsButton.setBackground(new java.awt.Color(103, 71, 206));
+        personalDetailsButton.setFont(new java.awt.Font("Century Gothic", 1, 13)); // NOI18N
+        personalDetailsButton.setForeground(new java.awt.Color(255, 255, 255));
+        personalDetailsButton.setText("View Personal Details");
+        personalDetailsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        personalDetailsButton.setFocusPainted(false);
+        personalDetailsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personalDetailsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -205,18 +218,6 @@ public class Head extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fileNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel7)
-                            .addGap(113, 113, 113)
-                            .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
@@ -224,7 +225,21 @@ public class Head extends javax.swing.JFrame {
                         .addGap(359, 359, 359)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(headClassText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(headClassText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(personalDetailsButton)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fileNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7)
+                                .addGap(113, 113, 113)
+                                .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -237,7 +252,9 @@ public class Head extends javax.swing.JFrame {
                     .addComponent(headNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(headClassText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(55, 55, 55)
+                .addGap(45, 45, 45)
+                .addComponent(personalDetailsButton)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -248,7 +265,7 @@ public class Head extends javax.swing.JFrame {
                         .addComponent(fileNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,6 +308,14 @@ public class Head extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void personalDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalDetailsButtonActionPerformed
+
+        PersonalDetails pd = new PersonalDetails();
+        pd.className=headClass;
+        pd.initialise();
+
+    }//GEN-LAST:event_personalDetailsButtonActionPerformed
 
     
     public static void infoBox(String infoMessage, String titleBar)
@@ -350,6 +375,7 @@ public class Head extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton personalDetailsButton;
     private javax.swing.JTable resultTable;
     // End of variables declaration//GEN-END:variables
 
