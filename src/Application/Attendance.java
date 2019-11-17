@@ -191,7 +191,7 @@ public class Attendance extends javax.swing.JFrame
         
         for(int i=0; i< model.getRowCount(); i++) 
         {
-                
+                //Adding the present table values into the query
                 pst.setInt(1, Integer.parseInt(model.getValueAt(i,2).toString()));
                 pst.setInt(2, Integer.parseInt(model.getValueAt(i,3).toString()));
                 pst.setInt(3, Integer.parseInt(model.getValueAt(i,4).toString()));

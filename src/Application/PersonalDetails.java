@@ -13,8 +13,6 @@ public class PersonalDetails extends javax.swing.JFrame
 {
     String className;
     
-   
-
     public PersonalDetails()
     {
         initComponents();
