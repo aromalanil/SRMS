@@ -2,7 +2,7 @@
 <div align="center">
 <img align="center" src="https://github.com/aromalanil/SRMS/blob/master/src/art/demo_login.jpg" width="500"><br/>
 </div>
-<p align="center">A java application for managing student's records like attendance intrnals etc.</p>
+<p align="center">A java application for managing student's records like attendance internals etc.</p>
 
 ## User
 -   Teachers
