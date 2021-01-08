@@ -14,7 +14,9 @@
 # Features
 ## Teachers
 
+<div align="center">
 <img  src="https://github.com/aromalanil/SRMS/blob/master/src/art/demo_teacher.jpg" width="600">
+</div>
 
 * Can input attendance of each students.
 * Can only input the data of the subjects which they are in charge of.
